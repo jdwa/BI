@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+	<bean id="systemSessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="systemDataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>					
+		<property name="annotatedClasses">
+			<list>
+				<value>com.ldchotels.system.model.Company</value>
+				<value>com.ldchotels.system.model.Role</value>
+				<value>com.ldchotels.system.model.Member</value>
+			</list>
+		</property>					
+	</bean>
+
+	<bean id="protelSessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="protelDataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>					
+		<property name="annotatedClasses">
+			<list>
+				<value>com.ldchotels.protel.model.Kunden</value>
+				<value>com.ldchotels.protel.model.Reservation</value>
+				<value>com.ldchotels.protel.model.ReservationCO</value>
+				<value>com.ldchotels.protel.model.Transaction</value>
+			</list>
+		</property>					
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="systemTransactionManager" />
+
+	<bean id="systemTransactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="systemSessionFactory" />
+	</bean>
+	
+	<bean id="protelTransactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="protelSessionFactory" />
+	</bean>
+	
+</beans>

@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+ "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+ "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+
+	<package name="default" namespace="/" extends="struts-default,json-default">
+	
+			<result-types>
+				<result-type name="tiles"
+					class="org.apache.struts2.views.tiles.TilesResult" />
+			</result-types>
+			
+			<interceptors>
+				<interceptor class="com.ldchotels.interceptor.AuthorityInterceptor" name="authorityInterceptor">
+					<param name="includeMethods">execute,prepare,validate</param>
+				</interceptor>
+				<interceptor-stack name="actionStack">
+					<interceptor-ref name="authorityInterceptor" />
+					<interceptor-ref name="timer" />
+					<interceptor-ref name="paramsPrepareParamsStack" />
+				</interceptor-stack>
+			</interceptors>
+			
+			<!--            
+            /***** struts-default.xml 2.3.14 paramsPrepareParamsStack *****/
+            <interceptor-stack name="paramsPrepareParamsStack">
+                <interceptor-ref name="exception"/>
+                <interceptor-ref name="alias"/>
+                <interceptor-ref name="i18n"/>
+                <interceptor-ref name="checkbox"/>
+                <interceptor-ref name="multiselect"/>
+                <interceptor-ref name="params">
+                    <param name="excludeParams">dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,parameters\...*</param>
+                </interceptor-ref>
+                <interceptor-ref name="servletConfig"/>
+                <interceptor-ref name="prepare"/>
+                <interceptor-ref name="chain"/>
+                <interceptor-ref name="modelDriven"/>
+                <interceptor-ref name="fileUpload"/>
+                <interceptor-ref name="staticParams"/>
+                <interceptor-ref name="actionMappingParams"/>
+                <interceptor-ref name="params">
+                    <param name="excludeParams">dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,parameters\...*</param>
+                </interceptor-ref>
+                <interceptor-ref name="conversionError"/>
+                <interceptor-ref name="validation">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref>
+                <interceptor-ref name="workflow">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref>
+            </interceptor-stack>
+            
+			/***** struts-default.xml 2.3.14 defaultStack *****/
+            <interceptor-stack name="defaultStack">
+                <interceptor-ref name="exception"/>
+                <interceptor-ref name="alias"/>
+                <interceptor-ref name="servletConfig"/>
+                <interceptor-ref name="i18n"/>
+                <interceptor-ref name="prepare"/>
+                <interceptor-ref name="chain"/>
+                <interceptor-ref name="scopedModelDriven"/>
+                <interceptor-ref name="modelDriven"/>
+                <interceptor-ref name="fileUpload"/>
+                <interceptor-ref name="checkbox"/>
+                <interceptor-ref name="multiselect"/>
+                <interceptor-ref name="staticParams"/>
+                <interceptor-ref name="actionMappingParams"/>
+                <interceptor-ref name="params">
+                    <param name="excludeParams">dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,parameters\...*</param>
+                </interceptor-ref>
+                <interceptor-ref name="conversionError"/>
+                <interceptor-ref name="validation">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref>
+                <interceptor-ref name="workflow">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref>
+                <interceptor-ref name="debugging"/>
+            </interceptor-stack>
+            -->
+            	
+			<default-interceptor-ref name="actionStack" />
+
+			<global-results>
+				<result name="login" type="tiles">pages.system.action.loginMember.tiles</result>
+				<result name="error">/pages/error.jsp</result>
+				<result name="none">/pages/error.jsp</result>
+			</global-results>
+
+		<!-- ***************************************************************************************** -->
+		
+		<!-- Protel Actions -->
+			<action name="KundenQueryAction.input" class="com.ldchotels.protel.action.KundenQueryAction"
+				method="input">
+				<result name="input" type="tiles">pages.protel.action.queryKundenInput.tiles</result>
+			</action>
+		
+			<action name="KundenQueryAction" class="com.ldchotels.protel.action.KundenQueryAction">
+				<result name="success" type="tiles">pages.protel.action.queryKundenResult.tiles</result>
+			</action>
+
+		<!-- Salesforce Actions -->
+			<action name="AccountUpsertAction.input" class="com.ldchotels.salesforce.action.AccountUpsertAction"
+				method="input">
+				<result name="input" type="tiles">pages.salesforce.action.upsertAccountInput.tiles</result>
+			</action>
+			
+			<action name="AccountUpsertAction" class="com.ldchotels.salesforce.action.AccountUpsertAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
+			</action>
+
+			<action name="AccountDeleteAction.input" class="com.ldchotels.salesforce.action.AccountDeleteAction"
+				method="input">
+				<result name="input" type="tiles">pages.salesforce.action.deleteAccountInput.tiles</result>
+			</action>
+			
+			<action name="AccountDeleteAction" class="com.ldchotels.salesforce.action.AccountDeleteAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
+			</action>
+
+			<action name="ReservationCOUpsertAction.input" class="com.ldchotels.salesforce.action.ReservationCOUpsertAction"
+				method="input">
+				<result name="input" type="tiles">pages.salesforce.action.upsertReservationCOInput.tiles</result>
+			</action>
+			
+			<action name="ReservationCOUpsertAction" class="com.ldchotels.salesforce.action.ReservationCOUpsertAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
+			</action>
+						
+			<action name="ReservationUpsertAction.input" class="com.ldchotels.salesforce.action.ReservationUpsertAction"
+				method="input">
+				<result name="input" type="tiles">pages.salesforce.action.upsertReservationInput.tiles</result>
+			</action>
+			
+			<action name="ReservationUpsertAction" class="com.ldchotels.salesforce.action.ReservationUpsertAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
+			</action>
+			
+			<action name="ReservationUpsertWithAccountAction.input" class="com.ldchotels.salesforce.action.ReservationUpsertWithAccountAction"
+				method="input">
+				<result name="input" type="tiles">pages.salesforce.action.upsertReservationWithAccountInput.tiles</result>
+			</action>
+			
+			<action name="ReservationUpsertWithAccountAction" class="com.ldchotels.salesforce.action.ReservationUpsertWithAccountAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
+			</action>
+
+			<action name="ReservationDeleteAction.input" class="com.ldchotels.salesforce.action.ReservationDeleteAction"
+				method="input">
+				<result name="input" type="tiles">pages.salesforce.action.deleteReservationInput.tiles</result>
+			</action>
+			
+			<action name="ReservationDeleteAction" class="com.ldchotels.salesforce.action.ReservationDeleteAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
+			</action>
+
+			<action name="TransactionUpsertAction.input" class="com.ldchotels.salesforce.action.TransactionUpsertAction"
+				method="input">
+				<result name="input" type="tiles">pages.salesforce.action.upsertTransactionInput.tiles</result>
+			</action>
+			
+			<action name="TransactionUpsertAction" class="com.ldchotels.salesforce.action.TransactionUpsertAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
+			</action>
+			
+			<action name="TransactionUpsertWithAccountAction.input" class="com.ldchotels.salesforce.action.TransactionUpsertWithAccountAction"
+				method="input">
+				<result name="input" type="tiles">pages.salesforce.action.upsertTransactionWithAccountInput.tiles</result>
+			</action>
+			
+			<action name="TransactionUpsertWithAccountAction" class="com.ldchotels.salesforce.action.TransactionUpsertWithAccountAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
+			</action>
+
+			<action name="TransactionDeleteAction.input" class="com.ldchotels.salesforce.action.TransactionDeleteAction"
+				method="input">
+				<result name="input" type="tiles">pages.salesforce.action.deleteTransactionInput.tiles</result>
+			</action>
+			
+			<action name="TransactionDeleteAction" class="com.ldchotels.salesforce.action.TransactionDeleteAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
+			</action>
+									
+			<action name="ResultAccountsDownloadAction" class="com.ldchotels.salesforce.action.ResultFilesDownloadAction"
+					method="resultAccountsDolnload">
+				<result name="success" type="stream">
+					<param name="contentType">application/octet-stream</param>
+					<param name="inputName">inputStream</param>
+					<param name="contentDisposition">attachment;filename="Account.csv"</param>
+					<param name="bufferSize">1024</param>
+				</result>
+				<result name="input" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
+			</action>
+
+			<action name="ResultReservationsDownloadAction" class="com.ldchotels.salesforce.action.ResultFilesDownloadAction"
+					method="resultReservationsDolnload">
+				<result name="success" type="stream">
+					<param name="contentType">application/octet-stream</param>
+					<param name="inputName">inputStream</param>
+					<param name="contentDisposition">attachment;filename="Reservations.csv"</param>
+					<param name="bufferSize">1024</param>
+				</result>
+				<result name="input" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
+			</action>
+
+			<action name="ResultReservationCOsDownloadAction" class="com.ldchotels.salesforce.action.ResultFilesDownloadAction"
+					method="resultReservationCOsDolnload">
+				<result name="success" type="stream">
+					<param name="contentType">application/octet-stream</param>
+					<param name="inputName">inputStream</param>
+					<param name="contentDisposition">attachment;filename="ReservationCOs.csv"</param>
+					<param name="bufferSize">1024</param>
+				</result>
+				<result name="input" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
+			</action>
+			
+			<action name="ResultTransactionsDownloadAction" class="com.ldchotels.salesforce.action.ResultFilesDownloadAction"
+					method="resultTransactionsDolnload">
+				<result name="success" type="stream">
+					<param name="contentType">application/octet-stream</param>
+					<param name="inputName">inputStream</param>
+					<param name="contentDisposition">attachment;filename="Transactions.csv"</param>
+					<param name="bufferSize">1024</param>
+				</result>
+				<result name="input" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
+			</action>
+					
+		<!-- ***************************************************************************************** -->
+			
+		<!-- System Initialization -->
+			<action name="DataInitializeAction" class="com.ldchotels.system.action.DataInitializeAction">
+				<result name="input" type="tiles">pages.system.action.initializeData.tiles</result>
+				<result name="success" type="tiles">pages.system.action.loginMember.tiles</result>
+			</action>
+
+		<!-- Administration Actions -->
+			<action name="MemberLoginAction.input" class="com.ldchotels.system.action.MemberLoginAction"
+				method="input">
+				<result name="input" type="tiles">pages.system.action.loginMember.tiles</result>
+			</action>					 
+			<action name="MemberLoginAction" class="com.ldchotels.system.action.MemberLoginAction">
+				<result name="none" type="tiles">pages.system.action.initializeData.tiles</result>
+				<result name="success" type="tiles">pages.system.action.showMemberControl.tiles</result>		
+			</action>
+			<action name="MemberPasswordChangeAction.input" class="com.ldchotels.system.common.CompanyAction"
+				method="input">
+				<result name="input" type="tiles">pages.system.action.changeMemberPassword.tiles</result>
+			</action>
+			<action name="MemberPasswordChangeAction" class="com.ldchotels.system.action.MemberPasswordChangeAction">
+				<result name="success" type="tiles">pages.system.action.loginMember.tiles</result>
+				<result name="error" type="tiles">pages.system.action.changeMemberPassword.tiles</result>
+			</action>
+			<action name="MemberLogoutAction" class="com.ldchotels.system.action.MemberLogoutAction">
+				<result name="success" type="tiles">pages.system.action.loginMember.tiles</result>
+				<result name="error" type="tiles">pages.system.action.loginMember.tiles</result>
+			</action>
+
+		<!-- Company -->
+			<action name="CompanyAction.input" class="com.ldchotels.system.common.CompanyAction"
+				method="input">
+				<result name="input" type="tiles">pages.system.common.addCompany.tiles</result>
+			</action>		
+			<action name="CompanyAction.add" class="com.ldchotels.system.common.CompanyAction"
+				method="add">
+				<result name="success" type="tiles">pages.system.common.showCompany.tiles</result>
+			</action>
+			<action name="CompanyAction.list" class="com.ldchotels.system.common.CompanyAction"
+				method="list">
+				<result name="success" type="tiles">pages.system.common.showCompany.tiles</result>
+			</action>
+			<action name="CompanyAction.delete" class="com.ldchotels.system.common.CompanyAction"
+				method="delete">
+				<result name="success" type="tiles">pages.system.common.showCompany.tiles</result>
+			</action>
+			<action name="CompanyAction.detail" class="com.ldchotels.system.common.CompanyAction"
+				method="detail">
+				<result name="success" type="tiles">pages.system.common.detailCompany.tiles</result>
+			</action>
+			<action name="CompanyAction.update" class="com.ldchotels.system.common.CompanyAction"
+				method="update">
+				<result name="success" type="tiles">pages.system.common.showCompany.tiles</result>
+			</action>
+
+		<!-- Role -->
+			<action name="RoleAction.input" class="com.ldchotels.system.common.RoleAction"
+				method="input">
+				<result name="input" type="tiles">pages.system.common.addRole.tiles</result>
+			</action>
+			<action name="RoleAction.add" class="com.ldchotels.system.common.RoleAction"
+				method="add">
+				<result name="success" type="tiles">pages.system.common.showRole.tiles</result>
+			</action>
+			<action name="RoleAction.list" class="com.ldchotels.system.common.RoleAction"
+				method="list">
+				<result name="success" type="tiles">pages.system.common.showRole.tiles</result>
+			</action>
+			<action name="RoleAction.delete" class="com.ldchotels.system.common.RoleAction"
+				method="delete">
+				<result name="success" type="tiles">pages.system.common.showRole.tiles</result>
+			</action>
+			<action name="RoleAction.detail" class="com.ldchotels.system.common.RoleAction"
+				method="detail">
+				<result name="success" type="tiles">pages.system.common.detailRole.tiles</result>
+			</action>
+			<action name="RoleAction.update" class="com.ldchotels.system.common.RoleAction"
+				method="update">
+				<result name="success" type="tiles">pages.system.common.showRole.tiles</result>
+			</action>
+
+		<!-- Member -->
+			<action name="MemberAction.input" class="com.ldchotels.system.common.MemberAction"
+				method="input">
+				<result name="input" type="tiles">pages.system.common.addMember.tiles</result>
+			</action>
+			<action name="MemberAction.add" class="com.ldchotels.system.common.MemberAction"
+				method="add">
+				<result name="success" type="tiles">pages.system.common.showMember.tiles</result>
+			</action>
+			<action name="MemberAction.list" class="com.ldchotels.system.common.MemberAction"
+				method="list" >
+				<result name="success" type="tiles">pages.system.common.showMember.tiles</result>
+			</action>
+			<action name="MemberAction.delete" class="com.ldchotels.system.common.MemberAction"
+				method="delete">
+				<result name="success" type="tiles">pages.system.common.showMember.tiles</result>
+			</action>
+			<action name="MemberAction.detail" class="com.ldchotels.system.common.MemberAction"
+				method="detail">
+				<result name="success" type="tiles">pages.system.common.detailMember.tiles</result>
+			</action>
+			<action name="MemberAction.update" class="com.ldchotels.system.common.MemberAction"
+				method="update">
+				<result name="success" type="tiles">pages.system.common.showMember.tiles</result>
+			</action>
+		
+	</package>
+</struts>

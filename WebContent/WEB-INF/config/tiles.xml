@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+  <definition name="baseLayout" template="/pages/template/baseLayout.jsp">
+      <put-attribute name="title" value="BI"/>
+      <put-attribute name="header" value="/pages/template/header.jsp"/>
+      <put-attribute name="menu" value="/pages/template/menu.jsp"/>
+      <put-attribute name="body" value="/pages/template/body.jsp"/>
+      <put-attribute name="footer" value="/pages/template/footer.jsp"/>
+  </definition>
+  <definition name="pages.index.tiles" extends="baseLayout">      
+      <put-attribute name="body" value="/pages/index.jsp"/>      
+  </definition>
+  
+  <!-- ***************************************************************************************** -->
+  
+   <!-- Protel -->
+  <definition name="pages.protel.action.queryKundenInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/protel/action/queryKundenInput.jsp"/>      
+  </definition>
+  <definition name="pages.protel.action.queryKundenResult.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/protel/action/queryKundenResult.jsp"/>      
+  </definition>
+  
+  <!-- Salesforce -->
+  <definition name="pages.salesforce.action.upsertAccountInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/salesforce/action/upsertAccountInput.jsp"/>      
+  </definition>
+  <definition name="pages.salesforce.action.deleteAccountInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/salesforce/action/deleteAccountInput.jsp"/>      
+  </definition>  
+  <definition name="pages.salesforce.action.upsertReservationInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/salesforce/action/upsertReservationInput.jsp"/>      
+  </definition>
+  <definition name="pages.salesforce.action.upsertReservationCOInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/salesforce/action/upsertReservationCOInput.jsp"/>      
+  </definition>  
+  <definition name="pages.salesforce.action.upsertReservationWithAccountInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/salesforce/action/upsertReservationWithAccountInput.jsp"/>      
+  </definition>
+  <definition name="pages.salesforce.action.deleteReservationInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/salesforce/action/deleteReservationInput.jsp"/>      
+  </definition>
+  <definition name="pages.salesforce.action.upsertTransactionInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/salesforce/action/upsertTransactionInput.jsp"/>      
+  </definition>  
+  <definition name="pages.salesforce.action.upsertTransactionWithAccountInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/salesforce/action/upsertTransactionWithAccountInput.jsp"/>      
+  </definition>
+  <definition name="pages.salesforce.action.deleteTransactionInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/salesforce/action/deleteTransactionInput.jsp"/>      
+  </definition>
+  <definition name="pages.salesforce.action.result.files.download.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/salesforce/action/downloadResultFiles.jsp"/>      
+  </definition>
+  <definition name="pages.salesforce.action.wait.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/wait.jsp"/>      
+  </definition>
+  
+  <!-- ***************************************************************************************** -->
+  
+  <definition name="pages.system.action.initializeData.tiles" extends="baseLayout">
+      <put-attribute name="body" value="/pages/system/action/initializeData.jsp"/>      
+  </definition>
+  <definition name="pages.system.action.loginMember.tiles" extends="baseLayout">     
+      <put-attribute name="body" value="/pages/system/action/loginMember.jsp"/>      
+  </definition>  
+  <definition name="pages.system.action.changeMemberPassword.tiles" extends="baseLayout">
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/system/action/changeMemberPassword.jsp"/>      
+  </definition>
+  <definition name="pages.system.action.showMemberControl.tiles" extends="baseLayout">
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>            
+  </definition>
+ 
+  <!-- Company -->
+  <definition name="pages.system.common.addCompany.tiles" extends="baseLayout">
+  	  <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/system/common/addCompany.jsp"/>      
+  </definition>
+  <definition name="pages.system.common.showCompany.tiles" extends="baseLayout">
+  	  <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/system/common/showCompany.jsp"/>      
+  </definition>
+  <definition name="pages.system.common.detailCompany.tiles" extends="baseLayout">
+  	  <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/system/common/detailCompany.jsp"/>      
+  </definition>
+ 
+  <!-- Role -->
+  <definition name="pages.system.common.addRole.tiles" extends="baseLayout">
+  	  <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/system/common/addRole.jsp"/>      
+  </definition>
+  <definition name="pages.system.common.showRole.tiles" extends="baseLayout">
+  	  <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/system/common/showRole.jsp"/>      
+  </definition>
+  <definition name="pages.system.common.detailRole.tiles" extends="baseLayout">
+  	  <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/system/common/detailRole.jsp"/>      
+  </definition>
+ 
+  <!-- Member -->
+  <definition name="pages.system.common.addMember.tiles" extends="baseLayout">
+  	  <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/system/common/addMember.jsp"/>      
+  </definition>
+  <definition name="pages.system.common.showMember.tiles" extends="baseLayout">
+  	  <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/system/common/showMember.jsp"/>      
+  </definition>
+  <definition name="pages.system.common.detailMember.tiles" extends="baseLayout">
+  	  <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/system/common/detailMember.jsp"/>      
+  </definition>
+   
+</tiles-definitions>
