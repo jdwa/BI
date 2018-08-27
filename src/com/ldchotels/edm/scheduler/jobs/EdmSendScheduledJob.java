@@ -15,7 +15,7 @@ public class EdmSendScheduledJob extends QuartzJobBean {
 	
 	@Override
 	protected void executeInternal(JobExecutionContext ctx)	throws JobExecutionException {
-
+		logger.info("[EdmSendScheduledJob][executeInternal]");
 		try {
 			EdmSender edmSender;
 			edmSender = new EdmSender(propertyBean);

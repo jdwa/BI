@@ -63,12 +63,4 @@ public class EdmSendAction extends ActionSupport implements Preparable, SessionA
 	public Map<String, Object> getSession() {
 		return this.session;
 	}
-	
-	public PropertyBean getPropertyBean() {
-		return propertyBean;
-	}
-
-	public void setPropertyBean(PropertyBean propertyBean) {
-		this.propertyBean = propertyBean;
-	}
 }

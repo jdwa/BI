@@ -98,11 +98,6 @@
 	*** Scheduler Job Beans ***
 	***************************
 	-->
-	<!-- Using EdmSendAction as JobDetail as well -->
-	<bean id="edmSendAction" class="com.ldchotels.edm.action.EdmSendAction">
-		<property name="propertyBean" ref="propertyBean" />
-	</bean>
-	
 	<!-- For times when you just need to invoke a method on a specific object -->
 	<!--
     <bean id="edmSendJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
