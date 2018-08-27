@@ -93,6 +93,15 @@
 			</global-results>
 
 		<!-- ***************************************************************************************** -->
+		<!-- EDM Actions -->
+			<action name="EdmSendAction.input" class="com.ldchotels.edm.action.EdmSendAction"
+				method="input">
+				<result name="input" type="tiles">pages.edm.action.edmSendInput.tiles</result>
+			</action>
+		
+			<action name="EdmSendAction" class="com.ldchotels.edm.action.EdmSendAction">
+				<result name="success" type="tiles">pages.edm.action.edmSendResult.tiles</result>
+			</action>
 		
 		<!-- Protel Actions -->
 			<action name="KundenQueryAction.input" class="com.ldchotels.protel.action.KundenQueryAction"

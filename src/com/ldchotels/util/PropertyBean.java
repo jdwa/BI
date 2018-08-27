@@ -15,6 +15,18 @@ public class PropertyBean {
 	private int maxRowsPerBatch = 5000; // 10 thousand rows per batch
 	private int sleepTime = 5000;
 	
+	private String mailHost;
+	private String mailFrom;
+	private boolean mailAuth;
+	private String mailUser;
+	private String mailPwd;
+	private int mailSleep;
+	private String mailFromName;
+	
+	private String edmList;
+	private String edmUrl;
+	private String edmSubject;
+	
 	private boolean fileDelete = true;
 	
 	public String getAuthorization() {
@@ -111,6 +123,86 @@ public class PropertyBean {
 	
 	public void setSleepTime(int sleepTime) {
 		this.sleepTime = sleepTime;
+	}
+
+	public String getMailHost() {
+		return mailHost;
+	}
+
+	public void setMailHost(String mailHost) {
+		this.mailHost = mailHost;
+	}
+
+	public String getMailFrom() {
+		return mailFrom;
+	}
+
+	public void setMailFrom(String mailFrom) {
+		this.mailFrom = mailFrom;
+	}
+
+	public boolean isMailAuth() {
+		return mailAuth;
+	}
+
+	public void setMailAuth(boolean mailAuth) {
+		this.mailAuth = mailAuth;
+	}
+
+	public String getMailUser() {
+		return mailUser;
+	}
+
+	public void setMailUser(String mailUser) {
+		this.mailUser = mailUser;
+	}
+
+	public String getMailPwd() {
+		return mailPwd;
+	}
+
+	public void setMailPwd(String mailPwd) {
+		this.mailPwd = mailPwd;
+	}
+
+	public int getMailSleep() {
+		return mailSleep;
+	}
+
+	public void setMailSleep(int mailSleep) {
+		this.mailSleep = mailSleep;
+	}
+
+	public String getMailFromName() {
+		return mailFromName;
+	}
+
+	public void setMailFromName(String mailFromName) {
+		this.mailFromName = mailFromName;
+	}
+
+	public String getEdmList() {
+		return edmList;
+	}
+
+	public void setEdmList(String edmList) {
+		this.edmList = edmList;
+	}
+
+	public String getEdmUrl() {
+		return edmUrl;
+	}
+
+	public void setEdmUrl(String edmUrl) {
+		this.edmUrl = edmUrl;
+	}
+
+	public String getEdmSubject() {
+		return edmSubject;
+	}
+
+	public void setEdmSubject(String edmSubject) {
+		this.edmSubject = edmSubject;
 	}
 }
 

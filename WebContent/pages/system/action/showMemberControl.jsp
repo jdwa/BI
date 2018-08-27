@@ -28,6 +28,10 @@
 	-->
 	<sj:accordion id="accordion" heightStyle="content" animate="true" collapsible="true">
 		<security:authorize access="hasAnyRole('ROLE_ADMIN')">
+			<s:set name="menu.edm.system"><s:text name="menu.edm.system" /></s:set>
+			<sj:accordionItem title="%{menu.edm.system}">
+				<sj:div><a href="EdmSendAction.input.action"><s:text name="action.edm.send" /></a></sj:div>	
+			</sj:accordionItem>
 			<s:set name="menu.protel.system"><s:text name="menu.protel.system" /></s:set>
 			<sj:accordionItem title="%{menu.protel.system}">
 				<sj:div><a href="KundenQueryAction.input.action"><s:text name="action.protel.query.kunden" /></a></sj:div>	

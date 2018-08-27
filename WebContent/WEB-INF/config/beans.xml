@@ -1,70 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:aop="http://www.springframework.org/schema/aop" 
-	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
-	<bean id="companyDao" class="com.ldchotels.system.dao.CompanyDaoImpl">
-		<property name="sessionFactory" ref="systemSessionFactory" />
-	</bean>
-
-	<bean id="companyBo" class="com.ldchotels.system.bo.CompanyBoImpl">
-		<property name="companyDao" ref="companyDao" />
-	</bean>
-
-	<bean id="roleDao" class="com.ldchotels.system.dao.RoleDaoImpl">
-		<property name="sessionFactory" ref="systemSessionFactory" />
-	</bean>
-
-	<bean id="roleBo" class="com.ldchotels.system.bo.RoleBoImpl">
-		<property name="roleDao" ref="roleDao" />
-	</bean>
-	
-	<bean id="memberDao" class="com.ldchotels.system.dao.MemberDaoImpl">
-		<property name="sessionFactory" ref="systemSessionFactory" />
-	</bean>
-
-	<bean id="memberBo" class="com.ldchotels.system.bo.MemberBoImpl">
-		<property name="memberDao" ref="memberDao" />
-	</bean>
-	
-	<bean id="kundenDao" class="com.ldchotels.protel.dao.KundenDaoImpl">
-		<property name="sessionFactory" ref="protelSessionFactory" />
-	</bean>
-
-	<bean id="kundenBo" class="com.ldchotels.protel.bo.KundenBoImpl">
-		<property name="kundenDao" ref="kundenDao" />
-	</bean>
-	
-	<bean id="reservationDao" class="com.ldchotels.protel.dao.ReservationDaoImpl">
-		<property name="sessionFactory" ref="protelSessionFactory" />
-	</bean>
-
-	<bean id="reservationBo" class="com.ldchotels.protel.bo.ReservationBoImpl">
-		<property name="reservationDao" ref="reservationDao" />
-	</bean>
-
-	<bean id="reservationCODao" class="com.ldchotels.protel.dao.ReservationCODaoImpl">
-		<property name="sessionFactory" ref="protelSessionFactory" />
-	</bean>
-
-	<bean id="reservationCOBo" class="com.ldchotels.protel.bo.ReservationCOBoImpl">
-		<property name="reservationCODao" ref="reservationCODao" />
-	</bean>
-		
-	<bean id="transactionDao" class="com.ldchotels.protel.dao.TransactionDaoImpl">
-		<property name="sessionFactory" ref="protelSessionFactory" />
-	</bean>
-
-	<bean id="transactionBo" class="com.ldchotels.protel.bo.TransactionBoImpl">
-		<property name="transactionDao" ref="transactionDao" />
-	</bean>
-
+	<!--
+	************************
+	*** Properties Beans ***
+	************************
+	-->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
@@ -107,6 +54,161 @@
 		<property name="transactionResultFile">
 			<value>${session.transaction.result.file}</value>
 		</property>
+		<property name="mailHost">
+			<value>${mail.host}</value>
+		</property>
+		<property name="mailFrom">
+			<value>${mail.from}</value>
+		</property>
+		<property name="mailAuth">
+			<value>${mail.auth}</value>
+		</property>
+		<property name="mailUser">
+			<value>${mail.user}</value>
+		</property>
+		<property name="mailPwd">
+			<value>${mail.pwd}</value>
+		</property>
+		<property name="mailSleep">
+			<value>${mail.sleep}</value>
+		</property>		
+		<property name="mailFromName">
+			<value>${mail.fromName}</value>
+		</property>	
+		<property name="edmList">
+			<value>${edm.List}</value>
+		</property>			
+		<property name="edmUrl">
+			<value>${edm.Url}</value>
+		</property>			
+		<property name="edmSubject">
+			<value>${edm.Subject}</value>
+		</property>							
 	</bean>
  
+ 	<!-- 
+	***************************
+	*** Application Context ***
+	***************************
+	<bean id="applicationContextProvider" class="com.ldchotels.util.ApplicationContextProvider"></bean>
+	-->
+	
+	<!-- 
+	***************************
+	*** Scheduler Job Beans ***
+	***************************
+	-->
+	<!-- Using EdmSendAction as JobDetail as well -->
+	<bean id="edmSendAction" class="com.ldchotels.edm.action.EdmSendAction">
+		<property name="propertyBean" ref="propertyBean" />
+	</bean>
+	
+	<!-- For times when you just need to invoke a method on a specific object -->
+	<!--
+    <bean id="edmSendJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="edmSendAction" />
+        <property name="targetMethod" value="execute" />
+    </bean>
+    -->
+    
+    <!-- For times when you need more complex processing, passing data to the scheduled job -->
+    <bean name="edmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.EdmSendScheduledJob" />
+        <property name="jobDataMap">
+            <map>
+                <entry key="propertyBean" value-ref="propertyBean" />
+            </map>
+        </property>
+        <property name="durability" value="true" />
+    </bean>
+
+    <!-- Run the job by cron expression defined -->
+    <bean id="edmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="edmSendJobDetail" />
+        <!-- Seconds   Minutes   Hours    Day-of-Month      Month          Day-of-Week         Year(optional field) -->
+        <property name="cronExpression" value="0/30 * * * * ?" />
+        
+    </bean>
+
+    <!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->
+    <bean  class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobDetails">
+            <list>
+                <ref bean="edmSendJobDetail" />
+            </list>
+        </property>
+ 
+        <property name="triggers">
+            <list>
+                <ref bean="edmSendCronTrigger" />
+            </list>
+        </property>
+    </bean>
+
+	<!--
+	********************
+	*** System Beans ***
+	********************
+	-->
+	<bean id="companyDao" class="com.ldchotels.system.dao.CompanyDaoImpl">
+		<property name="sessionFactory" ref="systemSessionFactory" />
+	</bean>
+
+	<bean id="companyBo" class="com.ldchotels.system.bo.CompanyBoImpl">
+		<property name="companyDao" ref="companyDao" />
+	</bean>
+
+	<bean id="roleDao" class="com.ldchotels.system.dao.RoleDaoImpl">
+		<property name="sessionFactory" ref="systemSessionFactory" />
+	</bean>
+
+	<bean id="roleBo" class="com.ldchotels.system.bo.RoleBoImpl">
+		<property name="roleDao" ref="roleDao" />
+	</bean>
+	
+	<bean id="memberDao" class="com.ldchotels.system.dao.MemberDaoImpl">
+		<property name="sessionFactory" ref="systemSessionFactory" />
+	</bean>
+
+	<bean id="memberBo" class="com.ldchotels.system.bo.MemberBoImpl">
+		<property name="memberDao" ref="memberDao" />
+	</bean>
+	
+	<!--
+	********************
+	*** Protel Beans ***
+	********************
+	-->
+	<bean id="kundenDao" class="com.ldchotels.protel.dao.KundenDaoImpl">
+		<property name="sessionFactory" ref="protelSessionFactory" />
+	</bean>
+
+	<bean id="kundenBo" class="com.ldchotels.protel.bo.KundenBoImpl">
+		<property name="kundenDao" ref="kundenDao" />
+	</bean>
+	
+	<bean id="reservationDao" class="com.ldchotels.protel.dao.ReservationDaoImpl">
+		<property name="sessionFactory" ref="protelSessionFactory" />
+	</bean>
+
+	<bean id="reservationBo" class="com.ldchotels.protel.bo.ReservationBoImpl">
+		<property name="reservationDao" ref="reservationDao" />
+	</bean>
+
+	<bean id="reservationCODao" class="com.ldchotels.protel.dao.ReservationCODaoImpl">
+		<property name="sessionFactory" ref="protelSessionFactory" />
+	</bean>
+
+	<bean id="reservationCOBo" class="com.ldchotels.protel.bo.ReservationCOBoImpl">
+		<property name="reservationCODao" ref="reservationCODao" />
+	</bean>
+		
+	<bean id="transactionDao" class="com.ldchotels.protel.dao.TransactionDaoImpl">
+		<property name="sessionFactory" ref="protelSessionFactory" />
+	</bean>
+
+	<bean id="transactionBo" class="com.ldchotels.protel.bo.TransactionBoImpl">
+		<property name="transactionDao" ref="transactionDao" />
+	</bean>
+
 </beans>

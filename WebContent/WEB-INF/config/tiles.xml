@@ -18,7 +18,17 @@
   </definition>
   
   <!-- ***************************************************************************************** -->
-  
+
+   <!-- EDM -->
+  <definition name="pages.edm.action.edmSendInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/edmSendInput.jsp"/>      
+  </definition>
+  <definition name="pages.edm.action.edmSendResult.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/edmSendResult.jsp"/>      
+  </definition>
+    
    <!-- Protel -->
   <definition name="pages.protel.action.queryKundenInput.tiles" extends="baseLayout">  
       <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
