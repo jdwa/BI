@@ -37,8 +37,8 @@ public class MemberLoginAction extends ActionSupport implements Preparable, Sess
 		String returnValue = ERROR;
 		
 		if(memberBo.findByAccount("bi.admin") == null){
-			Collection<GrantedAuthority> auths=new ArrayList<GrantedAuthority>();
-			GrantedAuthority role_code=new SimpleGrantedAuthority("ROLE_INITIALIZE");
+			Collection<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
+			GrantedAuthority role_code = new SimpleGrantedAuthority("ROLE_INITIALIZE");
 			auths.add(role_code);
 			SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(null, null, auths));
 			addActionMessage(getText("action.system.initialize"));

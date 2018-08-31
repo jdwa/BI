@@ -30,7 +30,7 @@
 		<security:authorize access="hasAnyRole('ROLE_ADMIN')">
 			<s:set name="menu.edm.system"><s:text name="menu.edm.system" /></s:set>
 			<sj:accordionItem title="%{menu.edm.system}">
-				<sj:div><a href="EdmSendAction.input.action"><s:text name="action.edm.send" /></a></sj:div>	
+				<sj:div><a href="BirthdayEdmSendAction.input.action"><s:text name="action.birthday.edm.send" /></a></sj:div>	
 			</sj:accordionItem>
 			<s:set name="menu.protel.system"><s:text name="menu.protel.system" /></s:set>
 			<sj:accordionItem title="%{menu.protel.system}">

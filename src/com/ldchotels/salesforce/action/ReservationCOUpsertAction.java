@@ -16,7 +16,7 @@ import com.ldchotels.protel.bo.ReservationCOBo;
 import com.ldchotels.protel.model.ReservationCO;
 import com.ldchotels.salesforce.bo.SalesForceBo;
 import com.ldchotels.salesforce.bo.SalesForceBoImpl;
-import com.ldchotels.util.PropertyBean;
+import com.ldchotels.util.SalesforceProperty;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 import com.sforce.async.*;
@@ -27,7 +27,7 @@ public class ReservationCOUpsertAction extends ActionSupport implements Preparab
 	private static Logger logger = Logger.getLogger(ReservationCOUpsertAction.class.getName());
 
 	private Map<String, Object> session;
-	private PropertyBean propertyBean;
+	private SalesforceProperty sfProperty;
 	private ReservationCOBo reservationCOBo;
 	private List<ReservationCO> reservationCOList; // For List action
 	private Date arrBegin;
@@ -65,7 +65,7 @@ public class ReservationCOUpsertAction extends ActionSupport implements Preparab
 			logger.info("Steps 1/3, Getting ReservationCOs from Protel ...");
 			this.addActionMessage("Steps 1/3, Getting ReservationCOs from Protel ...");
 			
-			ProtelBo ptl = new ProtelBoImpl(this.propertyBean, this.reservationCOBo);
+			ProtelBo ptl = new ProtelBoImpl(this.sfProperty, this.reservationCOBo);
 			reservationCOList = ptl.getReservationCOsFromProtel(arrBegin, arrEnd);	
 			
 			// For logging and waiting message			
@@ -73,11 +73,11 @@ public class ReservationCOUpsertAction extends ActionSupport implements Preparab
 			logger.info("Completed. Total ReservationCOs : " + reservationCOList.size() + ", Time consumed (ms): " + (timeStamp - now.getTime()));
 			this.addActionMessage("Completed. Total ReservationCOs : " + reservationCOList.size() + ", Time consumed (ms): " + (timeStamp - now.getTime()));
 								
-			SalesForceBo sf = new SalesForceBoImpl(propertyBean);
-			String authorization = propertyBean.getAuthorization();
-			String userName = propertyBean.getUserName();
-			String password = propertyBean.getPassword();
-			String fileDir = propertyBean.getFileDir();
+			SalesForceBo sf = new SalesForceBoImpl(sfProperty);
+			String authorization = sfProperty.getAuthorization();
+			String userName = sfProperty.getUserName();
+			String password = sfProperty.getPassword();
+			String fileDir = sfProperty.getFileDir();
 
 			// For logging and waiting message
 			logger.info("Steps 2/3, Saving ReservationCOs to file and upsert to Salesforce ...");
@@ -94,7 +94,7 @@ public class ReservationCOUpsertAction extends ActionSupport implements Preparab
 			// Upsert ReservationCO records.
 			ConcurrencyMode mode = (this.isSerial() ? ConcurrencyMode.Serial : ConcurrencyMode.Parallel);
 			sf.upsertToSF("Reservation__c", authorization, userName, password, filePath, "Name", mode);
-			this.session.put(this.propertyBean.getReservationCOResultFile(), filePath);
+			this.session.put(this.sfProperty.getReservationCOResultFile(), filePath);
 			
 			// For logging and waiting message
 			timeStamp = System.currentTimeMillis();
@@ -109,22 +109,22 @@ public class ReservationCOUpsertAction extends ActionSupport implements Preparab
 
     protected void finalize(){
     	if ((this.session != null) && (this.isFileDelete())) {
-    		File outputFile = new File(this.session.get(this.propertyBean.getAccountResultFile()).toString());
+    		File outputFile = new File(this.session.get(this.sfProperty.getAccountResultFile()).toString());
     		if (outputFile.exists() && outputFile.delete()){
     			logger.info("File deleted : " + outputFile.getAbsolutePath());
     		};
     		
-    		outputFile = new File(this.session.get(this.propertyBean.getReservationResultFile()).toString());
+    		outputFile = new File(this.session.get(this.sfProperty.getReservationResultFile()).toString());
     		if (outputFile.exists() && outputFile.delete()){
     			logger.info("File deleted : " + outputFile.getAbsolutePath());
     		};
   
-    		outputFile = new File(this.session.get(this.propertyBean.getReservationCOResultFile()).toString());
+    		outputFile = new File(this.session.get(this.sfProperty.getReservationCOResultFile()).toString());
     		if (outputFile.exists() && outputFile.delete()){
     			logger.info("File deleted : " + outputFile.getAbsolutePath());
     		};
     		
-    		outputFile = new File(this.session.get(this.propertyBean.getTransactionResultFile()).toString());
+    		outputFile = new File(this.session.get(this.sfProperty.getTransactionResultFile()).toString());
     		if (outputFile.exists() && outputFile.delete()){
     			logger.info("File deleted : " + outputFile.getAbsolutePath());
     		};
@@ -146,11 +146,11 @@ public class ReservationCOUpsertAction extends ActionSupport implements Preparab
 	/* Preparable */
 	@Override
 	public void prepare() throws Exception {
-		if (this.propertyBean == null) {
+		if (this.sfProperty == null) {
 			WebApplicationContext cxt = WebApplicationContextUtils
 					.getRequiredWebApplicationContext(ServletActionContext
 							.getServletContext());
-			this.propertyBean = (PropertyBean) cxt.getBean("propertyBean");
+			this.sfProperty = (SalesforceProperty) cxt.getBean("sfProperty");
 		}
 		
 		if (this.reservationCOBo == null) {

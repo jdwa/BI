@@ -18,7 +18,7 @@ import com.ldchotels.protel.model.Kunden;
 import com.ldchotels.protel.model.Reservation;
 import com.ldchotels.salesforce.bo.SalesForceBo;
 import com.ldchotels.salesforce.bo.SalesForceBoImpl;
-import com.ldchotels.util.PropertyBean;
+import com.ldchotels.util.SalesforceProperty;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 import com.sforce.async.*;
@@ -29,7 +29,7 @@ public class ReservationUpsertWithAccountAction extends ActionSupport implements
 	private static Logger logger = Logger.getLogger(ReservationUpsertWithAccountAction.class.getName());
 
 	private Map<String, Object> session;
-	private PropertyBean propertyBean;
+	private SalesforceProperty sfProperty;
 	private ReservationBo reservationBo;
 	private List<Reservation> reservationList; // For List action
 	private Kunden kunden; // For Add, Update action
@@ -70,7 +70,7 @@ public class ReservationUpsertWithAccountAction extends ActionSupport implements
 			logger.info("Steps 1/5, Getting Reservations from Protel ...");
 			this.addActionMessage("Steps 1/5, Getting Reservations from Protel ...");
 
-			ProtelBo ptl = new ProtelBoImpl(this.propertyBean, this.reservationBo);
+			ProtelBo ptl = new ProtelBoImpl(this.sfProperty, this.reservationBo);
 			reservationList = ptl.getReservationsFromProtel(arrBegin, arrEnd);
 			
 			// For logging and waiting message
@@ -99,11 +99,11 @@ public class ReservationUpsertWithAccountAction extends ActionSupport implements
 			logger.info("Completed. Total Kundens : " + kundenList.size());
 			this.addActionMessage("Completed. Total Kundens : " + kundenList.size());
 			
-			SalesForceBo sf = new SalesForceBoImpl(propertyBean);
-			String authorization = propertyBean.getAuthorization();
-			String userName = propertyBean.getUserName();
-			String password = propertyBean.getPassword();	
-			String fileDir = propertyBean.getFileDir();
+			SalesForceBo sf = new SalesForceBoImpl(sfProperty);
+			String authorization = sfProperty.getAuthorization();
+			String userName = sfProperty.getUserName();
+			String password = sfProperty.getPassword();	
+			String fileDir = sfProperty.getFileDir();
 			
 			// For logging and waiting message
 			logger.info("Steps 3/5, Saving Accounts to file and upsert to Salesforce ...");
@@ -113,7 +113,7 @@ public class ReservationUpsertWithAccountAction extends ActionSupport implements
 			String filePath = ptl.saveKundensToFile(fileDir + "Log_Pro_" + fileName, kundenList);
 			ConcurrencyMode mode = (this.isSerial() ? ConcurrencyMode.Serial : ConcurrencyMode.Parallel);
 			sf.upsertToSF("Account", authorization, userName, password, filePath, "Guest_Profile_No__c", mode);
-			this.session.put(this.propertyBean.getAccountResultFile(), filePath);
+			this.session.put(this.sfProperty.getAccountResultFile(), filePath);
 
 			// For logging and waiting message
 			logger.info("Steps 4/5, Saving Reservations to file and upsert to Salesforce ...");
@@ -123,7 +123,7 @@ public class ReservationUpsertWithAccountAction extends ActionSupport implements
 			filePath = ptl.saveReservationsToFile(fileDir + "Log_Rev_" + fileName, reservationList);
 			mode = (this.isSerial() ? ConcurrencyMode.Serial : ConcurrencyMode.Parallel);
 			sf.upsertToSF("Reservation__c", authorization, userName, password, filePath, "Name", mode);
-			this.session.put(this.propertyBean.getReservationResultFile(), filePath);
+			this.session.put(this.sfProperty.getReservationResultFile(), filePath);
 			
 			// For logging and waiting message
 			timeStamp = System.currentTimeMillis();
@@ -138,22 +138,22 @@ public class ReservationUpsertWithAccountAction extends ActionSupport implements
 
     protected void finalize(){
     	if ((this.session != null) && (this.isFileDelete())) {
-    		File outputFile = new File(this.session.get(this.propertyBean.getAccountResultFile()).toString());
+    		File outputFile = new File(this.session.get(this.sfProperty.getAccountResultFile()).toString());
     		if (outputFile.exists() && outputFile.delete()){
     			logger.info("File deleted : " + outputFile.getAbsolutePath());
     		};
     		
-    		outputFile = new File(this.session.get(this.propertyBean.getReservationResultFile()).toString());
+    		outputFile = new File(this.session.get(this.sfProperty.getReservationResultFile()).toString());
     		if (outputFile.exists() && outputFile.delete()){
     			logger.info("File deleted : " + outputFile.getAbsolutePath());
     		};
     		
-    		outputFile = new File(this.session.get(this.propertyBean.getReservationCOResultFile()).toString());
+    		outputFile = new File(this.session.get(this.sfProperty.getReservationCOResultFile()).toString());
     		if (outputFile.exists() && outputFile.delete()){
     			logger.info("File deleted : " + outputFile.getAbsolutePath());
     		};
     		
-    		outputFile = new File(this.session.get(this.propertyBean.getTransactionResultFile()).toString());
+    		outputFile = new File(this.session.get(this.sfProperty.getTransactionResultFile()).toString());
     		if (outputFile.exists() && outputFile.delete()){
     			logger.info("File deleted : " + outputFile.getAbsolutePath());
     		};
@@ -175,11 +175,11 @@ public class ReservationUpsertWithAccountAction extends ActionSupport implements
 	/* Preparable */
 	@Override
 	public void prepare() throws Exception {
-		if (this.propertyBean == null) {
+		if (this.sfProperty == null) {
 			WebApplicationContext cxt = WebApplicationContextUtils
 					.getRequiredWebApplicationContext(ServletActionContext
 							.getServletContext());
-			this.propertyBean = (PropertyBean) cxt.getBean("propertyBean");
+			this.sfProperty = (SalesforceProperty) cxt.getBean("sfProperty");
 		}
 		
 		if (this.reservationBo == null) {

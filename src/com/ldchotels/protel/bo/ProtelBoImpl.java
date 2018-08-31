@@ -13,14 +13,13 @@ import com.ldchotels.protel.model.Kunden;
 import com.ldchotels.protel.model.Reservation;
 import com.ldchotels.protel.model.ReservationCO;
 import com.ldchotels.protel.model.Transaction;
-import com.ldchotels.util.PropertyBean;
+import com.ldchotels.util.SalesforceProperty;
 import com.ldchotels.util.StringUtils;
 
 public class ProtelBoImpl implements ProtelBo {
 	
 	private static Logger logger = Logger.getLogger(ProtelBoImpl.class.getName());
 	
-	private PropertyBean propertyBean;
 	private Kunden kunden; // For Add, Update action
 	private KundenBo kundenBo;
 	private Reservation reservation; // For Add, Update action
@@ -30,32 +29,20 @@ public class ProtelBoImpl implements ProtelBo {
 	private Transaction transaction; // For Add, Update action
 	private TransactionBo transactionBo;
 	
-	public ProtelBoImpl(PropertyBean propertyBean, KundenBo kundenBo) {		
-		this.propertyBean = propertyBean;
+	public ProtelBoImpl(SalesforceProperty sfProperty, KundenBo kundenBo) {		
 		this.kundenBo = kundenBo;
 	}
 	
-	public ProtelBoImpl(PropertyBean propertyBean, ReservationBo reservationBo) {		
-		this.propertyBean = propertyBean;
+	public ProtelBoImpl(SalesforceProperty sfProperty, ReservationBo reservationBo) {		
 		this.reservationBo = reservationBo;
 	}
 	
-	public ProtelBoImpl(PropertyBean propertyBean, ReservationCOBo reservationCOBo) {		
-		this.propertyBean = propertyBean;
+	public ProtelBoImpl(SalesforceProperty sfProperty, ReservationCOBo reservationCOBo) {		
 		this.reservationCOBo = reservationCOBo;
 	}
 	
-	public ProtelBoImpl(PropertyBean propertyBean, TransactionBo transactionBo) {		
-		this.propertyBean = propertyBean;
+	public ProtelBoImpl(SalesforceProperty sfProperty, TransactionBo transactionBo) {		
 		this.transactionBo = transactionBo;
-	}
-	
-	public PropertyBean getPropertyBean() {
-		return propertyBean;
-	}
-	
-	public void setPropertyBean(PropertyBean propertyBean) {
-		this.propertyBean = propertyBean;
 	}
 	
 	public List<Kunden> getKundensFromProtel(String chgBegin, String chgEnd) {

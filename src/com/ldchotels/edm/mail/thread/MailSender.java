@@ -7,7 +7,7 @@ import javax.mail.internet.*;
 
 import org.apache.log4j.Logger;
 
-import com.ldchotels.util.PropertyBean;
+import com.ldchotels.util.EdmProperty;
 
 public class MailSender extends java.lang.Thread {
 	private static Logger logger = Logger.getLogger(MailSender.class.getName());
@@ -20,15 +20,15 @@ public class MailSender extends java.lang.Thread {
 	// 內容
 	private String content;
 	// 設定檔
-	private PropertyBean propertyBean;
+	private EdmProperty edmProperty;
 
 	// 建構
-	public MailSender(String to, String subject, String content, PropertyBean propertyBean) {
+	public MailSender(String to, String subject, String content, EdmProperty edmProperty) {
 		super();
 		this.to = to;
 		this.subject = subject;
 		this.content = content;
-		this.propertyBean = propertyBean;
+		this.edmProperty = edmProperty;
 	}
 
 	// thread run
@@ -37,14 +37,14 @@ public class MailSender extends java.lang.Thread {
 
 			// 設定傳送基本資訊
 			// 取得mail host名稱
-			String host = propertyBean.getMailHost();
+			String host = edmProperty.getMailHost();
 			// 取得寄信者mail
-			String from = propertyBean.getMailFrom();
+			String from = edmProperty.getMailFrom();
 
 			// 取得寄信者帳號
-			String user = propertyBean.getMailUser();
+			String user = edmProperty.getMailUser();
 			// 取得寄信者帳號密碼
-			String pwd = propertyBean.getMailPwd();
+			String pwd = edmProperty.getMailPwd();
 
 			Properties props = System.getProperties();
 
@@ -62,7 +62,7 @@ public class MailSender extends java.lang.Thread {
 			MimeMessage message = new MimeMessage(mailSession);
 
 			// 設定mail From
-			message.setFrom(new InternetAddress(from, propertyBean.getMailFromName(), "utf-8"));
+			message.setFrom(new InternetAddress(from, edmProperty.getMailFromName(), "utf-8"));
 			// 設定mail To
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			// 設定標題

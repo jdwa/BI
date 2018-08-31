@@ -20,7 +20,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.ldchotels.util.PropertyBean;
+import com.ldchotels.util.SalesforceProperty;
 import com.sforce.async.AsyncApiException;
 import com.sforce.async.BatchInfo;
 import com.sforce.async.BatchStateEnum;
@@ -40,10 +40,10 @@ public class SalesForceBoImpl implements SalesForceBo {
 	
 	private static Logger logger = Logger.getLogger(SalesForceBoImpl.class.getName());
 	
-	private PropertyBean propertyBean;
+	private SalesforceProperty sfProperty;
 	
-	public SalesForceBoImpl (PropertyBean propertyBean) {
-		this.setPropertyBean(propertyBean);
+	public SalesForceBoImpl (SalesforceProperty sfProperty) {
+		this.sfProperty = sfProperty;
 	}
 	/**
 	 * Creates a Bulk API job and uploads batches for a CSV file.
@@ -141,7 +141,7 @@ public class SalesForceBoImpl implements SalesForceBo {
 			} catch (InterruptedException e) {
 			}
 			logger.info("Awaiting results..." + incomplete.size());
-			sleepTime = this.propertyBean.getSleepTime();
+			sleepTime = this.sfProperty.getSleepTime();
 			BatchInfo[] statusList = connection.getBatchInfoList(job.getId()).getBatchInfo();
 			for (BatchInfo b : statusList) {
 				if (b.getState() == BatchStateEnum.Completed || b.getState() == BatchStateEnum.Failed) {
@@ -236,8 +236,8 @@ public class SalesForceBoImpl implements SalesForceBo {
 		// Split the CSV file into multiple batches
 		try {
 			FileOutputStream tmpOut = new FileOutputStream(tmpFile);
-			int maxBytesPerBatch = this.propertyBean.getMaxBytesPerBatch(); // 10 million bytes per batch
-			int maxRowsPerBatch = this.propertyBean.getMaxRowsPerBatch(); // 10 thousand rows per batch
+			int maxBytesPerBatch = this.sfProperty.getMaxBytesPerBatch(); // 10 million bytes per batch
+			int maxRowsPerBatch = this.sfProperty.getMaxRowsPerBatch(); // 10 thousand rows per batch
 			int currentBytes = 0;
 			int currentLines = 0;
 			String nextLine;
@@ -331,7 +331,7 @@ public class SalesForceBoImpl implements SalesForceBo {
 		String[] queryResults = null;
 
 		for (int i = 0; i < 10000; i++) {
-			Thread.sleep(this.propertyBean.getSleepTime());
+			Thread.sleep(this.sfProperty.getSleepTime());
 			info = bulkConnection.getBatchInfo(job.getId(), info.getId());
 
 			if (info.getState() == BatchStateEnum.Completed) {
@@ -414,7 +414,7 @@ public class SalesForceBoImpl implements SalesForceBo {
 		String[] queryResults = null;
 
 		while (true) {
-			Thread.sleep(this.propertyBean.getSleepTime());
+			Thread.sleep(this.sfProperty.getSleepTime());
 			info = bulkConnection.getBatchInfo(job.getId(), info.getId());
 
 			if (info.getState() == BatchStateEnum.Completed) {
@@ -496,7 +496,7 @@ public class SalesForceBoImpl implements SalesForceBo {
 		String[] queryResults = null;
 
 		while (true) {
-			Thread.sleep(this.propertyBean.getSleepTime());
+			Thread.sleep(this.sfProperty.getSleepTime());
 			info = bulkConnection.getBatchInfo(job.getId(), info.getId());
 
 			if (info.getState() == BatchStateEnum.Completed) {
@@ -578,7 +578,7 @@ public class SalesForceBoImpl implements SalesForceBo {
 		String[] queryResults = null;
 
 		while (true) {
-			Thread.sleep(this.propertyBean.getSleepTime());
+			Thread.sleep(this.sfProperty.getSleepTime());
 			info = bulkConnection.getBatchInfo(job.getId(), info.getId());
 
 			if (info.getState() == BatchStateEnum.Completed) {
@@ -629,13 +629,6 @@ public class SalesForceBoImpl implements SalesForceBo {
 		}
 		
 		closeJob(bulkConnection, job.getId());
-	}
-	
-	public PropertyBean getPropertyBean() {
-		return propertyBean;
-	}
-	public void setPropertyBean(PropertyBean propertyBean) {
-		this.propertyBean = propertyBean;
 	}
 }
 

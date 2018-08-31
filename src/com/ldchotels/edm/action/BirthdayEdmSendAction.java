@@ -1,49 +1,32 @@
-package com.ldchotels.salesforce.action;
+package com.ldchotels.edm.action;
 
-import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.ldchotels.salesforce.bo.SalesForceBo;
-import com.ldchotels.salesforce.bo.SalesForceBoImpl;
-import com.ldchotels.util.SalesforceProperty;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
-import com.sforce.async.*;
-import com.sforce.ws.ConnectionException;
+import com.ldchotels.edm.controller.BirthdayEdmSender;
+import com.ldchotels.util.SalesforceProperty;
 
-public class AccountQueryAction extends ActionSupport implements Preparable, SessionAware {
+public class BirthdayEdmSendAction extends ActionSupport implements Preparable, SessionAware {
 	private static final long serialVersionUID = 1L;
-
 	private Map<String, Object> session;
 	private SalesforceProperty sfProperty;
-	
-	public AccountQueryAction() {
+
+	public BirthdayEdmSendAction() {
 		super();
 	}
 
-	public String execute() throws AsyncApiException, ConnectionException, IOException, Exception {
-		String returnValue = ERROR;
-		
-		if (this.session != null) {
-			Date now = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");		
-			String fileName = sdf.format(now) + "_" + now.getTime() + ".csv";
-			
-			SalesForceBo sf = new SalesForceBoImpl(sfProperty);
-			String authorization = sfProperty.getAuthorization();
-			String userName = sfProperty.getUserName();
-			String password = sfProperty.getPassword();
-			String fileDir = sfProperty.getFileDir();
-			String filePath = fileDir + "Rlt_Pro_" + fileName;
-			sf.doBulkQueryAccount(authorization, userName, password, filePath);
-			returnValue = SUCCESS;
-		}
+	/* ActionSupport */
+	@Override
+	public String execute() throws Exception {
+		String returnValue = SUCCESS;
+		BirthdayEdmSender edmSender = new BirthdayEdmSender();
+		edmSender.start();
 		
 		return returnValue;
 	}

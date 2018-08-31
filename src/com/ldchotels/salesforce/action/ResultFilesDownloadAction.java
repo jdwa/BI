@@ -9,7 +9,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.ldchotels.util.PropertyBean;
+import com.ldchotels.util.SalesforceProperty;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 
@@ -19,7 +19,7 @@ public class ResultFilesDownloadAction extends ActionSupport implements Preparab
 
 	private Map<String, Object> session;
 	private InputStream inputStream;
-	private PropertyBean propertyBean;
+	private SalesforceProperty sfProperty;
 
 	public ResultFilesDownloadAction() {
 		super();
@@ -34,8 +34,8 @@ public class ResultFilesDownloadAction extends ActionSupport implements Preparab
 	public String resultAccountsDolnload() throws Exception {
 		String returnValue = ERROR;	
 		if (this.session != null) {
-			if (this.session.get(this.propertyBean.getAccountResultFile()) != null) {
-				File outputFile = new File(this.session.get(this.propertyBean.getAccountResultFile()).toString());	
+			if (this.session.get(this.sfProperty.getAccountResultFile()) != null) {
+				File outputFile = new File(this.session.get(this.sfProperty.getAccountResultFile()).toString());	
 				if (outputFile.exists()) {
 					inputStream = new FileInputStream(outputFile);
 					returnValue = SUCCESS;
@@ -54,8 +54,8 @@ public class ResultFilesDownloadAction extends ActionSupport implements Preparab
 	public String resultReservationsDolnload() throws Exception {
 		String returnValue = ERROR;	
 		if (this.session != null) {
-			if (this.session.get(this.propertyBean.getReservationResultFile()) != null) {
-				File outputFile = new File(this.session.get(this.propertyBean.getReservationResultFile()).toString());
+			if (this.session.get(this.sfProperty.getReservationResultFile()) != null) {
+				File outputFile = new File(this.session.get(this.sfProperty.getReservationResultFile()).toString());
 				if (outputFile.exists()) {
 					inputStream = new FileInputStream(outputFile);
 					returnValue = SUCCESS;
@@ -74,8 +74,8 @@ public class ResultFilesDownloadAction extends ActionSupport implements Preparab
 	public String resultReservationCOsDolnload() throws Exception {
 		String returnValue = ERROR;	
 		if (this.session != null) {
-			if (this.session.get(this.propertyBean.getReservationCOResultFile()) != null) {
-				File outputFile = new File(this.session.get(this.propertyBean.getReservationCOResultFile()).toString());
+			if (this.session.get(this.sfProperty.getReservationCOResultFile()) != null) {
+				File outputFile = new File(this.session.get(this.sfProperty.getReservationCOResultFile()).toString());
 				if (outputFile.exists()) {
 					inputStream = new FileInputStream(outputFile);
 					returnValue = SUCCESS;
@@ -94,8 +94,8 @@ public class ResultFilesDownloadAction extends ActionSupport implements Preparab
 	public String resultTransactionsDolnload() throws Exception {
 		String returnValue = ERROR;	
 		if (this.session != null) {
-			if (this.session.get(this.propertyBean.getTransactionResultFile()) != null) {
-				File outputFile = new File(this.session.get(this.propertyBean.getTransactionResultFile()).toString());	
+			if (this.session.get(this.sfProperty.getTransactionResultFile()) != null) {
+				File outputFile = new File(this.session.get(this.sfProperty.getTransactionResultFile()).toString());	
 				if (outputFile.exists()) {
 					inputStream = new FileInputStream(outputFile);
 					returnValue = SUCCESS;
@@ -112,23 +112,23 @@ public class ResultFilesDownloadAction extends ActionSupport implements Preparab
 	}
 	
     protected void finalize(){
-    	if ((this.session != null) && (this.propertyBean.isFileDelete())) {
-    		File outputFile = new File(this.session.get(this.propertyBean.getAccountResultFile()).toString());
+    	if ((this.session != null) && (this.sfProperty.isFileDelete())) {
+    		File outputFile = new File(this.session.get(this.sfProperty.getAccountResultFile()).toString());
     		if (outputFile.exists() && outputFile.delete()){
     			logger.info("File deleted : " + outputFile.getAbsolutePath());
     		};
     		
-    		outputFile = new File(this.session.get(this.propertyBean.getReservationResultFile()).toString());
+    		outputFile = new File(this.session.get(this.sfProperty.getReservationResultFile()).toString());
     		if (outputFile.exists() && outputFile.delete()){
     			logger.info("File deleted : " + outputFile.getAbsolutePath());
     		};
     		
-    		outputFile = new File(this.session.get(this.propertyBean.getReservationCOResultFile()).toString());
+    		outputFile = new File(this.session.get(this.sfProperty.getReservationCOResultFile()).toString());
     		if (outputFile.exists() && outputFile.delete()){
     			logger.info("File deleted : " + outputFile.getAbsolutePath());
     		};
     		
-    		outputFile = new File(this.session.get(this.propertyBean.getTransactionResultFile()).toString());
+    		outputFile = new File(this.session.get(this.sfProperty.getTransactionResultFile()).toString());
     		if (outputFile.exists() && outputFile.delete()){
     			logger.info("File deleted : " + outputFile.getAbsolutePath());
     		};
@@ -150,11 +150,11 @@ public class ResultFilesDownloadAction extends ActionSupport implements Preparab
 	/* Preparable */
 	@Override
 	public void prepare() throws Exception {
-		if (this.propertyBean == null) {
+		if (this.sfProperty == null) {
 			WebApplicationContext cxt = WebApplicationContextUtils
 					.getRequiredWebApplicationContext(ServletActionContext
 							.getServletContext());
-			this.propertyBean = (PropertyBean) cxt.getBean("propertyBean");
+			this.sfProperty = (SalesforceProperty) cxt.getBean("sfProperty");
 		}
 	}
 

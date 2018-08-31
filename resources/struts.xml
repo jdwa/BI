@@ -94,13 +94,13 @@
 
 		<!-- ***************************************************************************************** -->
 		<!-- EDM Actions -->
-			<action name="EdmSendAction.input" class="com.ldchotels.edm.action.EdmSendAction"
+			<action name="BirthdayEdmSendAction.input" class="com.ldchotels.edm.action.BirthdayEdmSendAction"
 				method="input">
-				<result name="input" type="tiles">pages.edm.action.edmSendInput.tiles</result>
+				<result name="input" type="tiles">pages.edm.action.birthdayEdmSendInput.tiles</result>
 			</action>
 		
-			<action name="EdmSendAction" class="com.ldchotels.edm.action.EdmSendAction">
-				<result name="success" type="tiles">pages.edm.action.edmSendResult.tiles</result>
+			<action name="BirthdayEdmSendAction" class="com.ldchotels.edm.action.BirthdayEdmSendAction">
+				<result name="success" type="tiles">pages.edm.action.birthdayEdmSendResult.tiles</result>
 			</action>
 		
 		<!-- Protel Actions -->

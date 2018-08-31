@@ -12,15 +12,23 @@
 	*** Properties Beans ***
 	************************
 	-->
-	<bean id="propertyConfigurer"
+	<bean id="propertyConfigurer" 
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location">
-			<value>/WEB-INF/config/config.properties</value>
-		</property>
-		<property name="fileEncoding" value="utf-8" />
+        <property name="locations">
+            <list>
+                <value>/WEB-INF/config/system.properties</value>
+                <value>/WEB-INF/config/salesforce.properties</value>
+                <value>/WEB-INF/config/edm.properties</value>
+            </list>
+        </property> 
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="fileEncoding" value="utf-8" />
+    </bean>
+    
+    <bean id="sysProperty" class="com.ldchotels.util.SystemProperty">							
 	</bean>
 	
-	<bean id="propertyBean" class="com.ldchotels.util.PropertyBean">
+	<bean id="sfProperty" class="com.ldchotels.util.SalesforceProperty">
 		<property name="authorization">
 			<value>${sf.authorization}</value>
 		</property>
@@ -54,6 +62,9 @@
 		<property name="transactionResultFile">
 			<value>${session.transaction.result.file}</value>
 		</property>
+	</bean>
+
+	<bean id="edmProperty" class="com.ldchotels.util.EdmProperty">
 		<property name="mailHost">
 			<value>${mail.host}</value>
 		</property>
@@ -75,14 +86,14 @@
 		<property name="mailFromName">
 			<value>${mail.fromName}</value>
 		</property>	
-		<property name="edmList">
-			<value>${edm.List}</value>
+		<property name="birthdayEdmList">
+			<value>${birthday.edm.List}</value>
 		</property>			
-		<property name="edmUrl">
-			<value>${edm.Url}</value>
+		<property name="birthdayEdmUrl">
+			<value>${birthday.edm.Url}</value>
 		</property>			
-		<property name="edmSubject">
-			<value>${edm.Subject}</value>
+		<property name="birthdayEdmSubject">
+			<value>${birthday.edm.Subject}</value>
 		</property>							
 	</bean>
  
@@ -90,52 +101,45 @@
 	***************************
 	*** Application Context ***
 	***************************
-	<bean id="applicationContextProvider" class="com.ldchotels.util.ApplicationContextProvider"></bean>
 	-->
+	<bean id="applicationContextProvider" class="com.ldchotels.util.ApplicationContextProvider"></bean>
 	
 	<!-- 
 	***************************
 	*** Scheduler Job Beans ***
 	***************************
 	-->
-	<!-- For times when you just need to invoke a method on a specific object -->
-	<!--
-    <bean id="edmSendJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <property name="targetObject" ref="edmSendAction" />
-        <property name="targetMethod" value="execute" />
-    </bean>
-    -->
-    
     <!-- For times when you need more complex processing, passing data to the scheduled job -->
-    <bean name="edmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-        <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.EdmSendScheduledJob" />
+    <bean name="birthdayEdmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.BirthdayEdmSendScheduledJob" />
         <property name="jobDataMap">
             <map>
-                <entry key="propertyBean" value-ref="propertyBean" />
+                <entry key="sfProperty" value-ref="sfProperty" />
             </map>
         </property>
         <property name="durability" value="true" />
     </bean>
 
     <!-- Run the job by cron expression defined -->
-    <bean id="edmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="edmSendJobDetail" />
-        <!-- Seconds   Minutes   Hours    Day-of-Month      Month          Day-of-Week         Year(optional field) -->
+    <bean id="birthdayEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="birthdayEdmSendJobDetail" />
+        <!-- Seconds   Minutes   Hours    Day-of-Month      Month          Day-of-Week         Year(optional field) 
         <property name="cronExpression" value="0/30 * * * * ?" />
-        
+        -->
+        <property name="cronExpression" value="0 0 10 * * ?" />
     </bean>
 
     <!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->
     <bean  class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="jobDetails">
             <list>
-                <ref bean="edmSendJobDetail" />
+                <ref bean="birthdayEdmSendJobDetail" />
             </list>
         </property>
  
         <property name="triggers">
             <list>
-                <ref bean="edmSendCronTrigger" />
+                <ref bean="birthdayEdmSendCronTrigger" />
             </list>
         </property>
     </bean>
@@ -205,5 +209,46 @@
 	<bean id="transactionBo" class="com.ldchotels.protel.bo.TransactionBoImpl">
 		<property name="transactionDao" ref="transactionDao" />
 	</bean>
+	
+	<!--
+	********************
+	*** Athena Beans ***
+	********************
+	-->
+	<bean id="employeeHQDao" class="com.ldchotels.athena.dao.EmployeeHQDaoImpl">
+		<property name="sessionFactory" ref="athenaHQSessionFactory" />
+	</bean>
 
+	<bean id="employeeSJDao" class="com.ldchotels.athena.dao.EmployeeSJDaoImpl">
+		<property name="sessionFactory" ref="athenaSJSessionFactory" />
+	</bean>
+	
+	<bean id="employeeTYDao" class="com.ldchotels.athena.dao.EmployeeTYDaoImpl">
+		<property name="sessionFactory" ref="athenaTYSessionFactory" />
+	</bean>
+	
+	<bean id="employeeHLDao" class="com.ldchotels.athena.dao.EmployeeHLDaoImpl">
+		<property name="sessionFactory" ref="athenaHLSessionFactory" />
+	</bean>
+	
+	<bean id="employeeKHDao" class="com.ldchotels.athena.dao.EmployeeKHDaoImpl">
+		<property name="sessionFactory" ref="athenaKHSessionFactory" />
+	</bean>
+	
+	<bean id="employeeCYDao" class="com.ldchotels.athena.dao.EmployeeCYDaoImpl">
+		<property name="sessionFactory" ref="athenaCYSessionFactory" />
+	</bean>
+	
+	<bean id="employeeSMLDao" class="com.ldchotels.athena.dao.EmployeeSMLDaoImpl">
+		<property name="sessionFactory" ref="athenaSMLSessionFactory" />
+	</bean>
+	
+	<bean id="employeePDCDao" class="com.ldchotels.athena.dao.EmployeePDCDaoImpl">
+		<property name="sessionFactory" ref="athenaPDCSessionFactory" />
+	</bean>
+	
+	<bean id="employeeYPDao" class="com.ldchotels.athena.dao.EmployeeYPDaoImpl">
+		<property name="sessionFactory" ref="athenaYPSessionFactory" />
+	</bean>
+	
 </beans>

@@ -20,13 +20,13 @@
   <!-- ***************************************************************************************** -->
 
    <!-- EDM -->
-  <definition name="pages.edm.action.edmSendInput.tiles" extends="baseLayout">  
+  <definition name="pages.edm.action.birthdayEdmSendInput.tiles" extends="baseLayout">  
       <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
-      <put-attribute name="body" value="/pages/edm/action/edmSendInput.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/birthdayEdmSendInput.jsp"/>      
   </definition>
-  <definition name="pages.edm.action.edmSendResult.tiles" extends="baseLayout">  
+  <definition name="pages.edm.action.birthdayEdmSendResult.tiles" extends="baseLayout">  
       <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
-      <put-attribute name="body" value="/pages/edm/action/edmSendResult.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/birthdayEdmSendResult.jsp"/>      
   </definition>
     
    <!-- Protel -->

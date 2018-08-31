@@ -12,7 +12,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.ldchotels.salesforce.bo.SalesForceBo;
 import com.ldchotels.salesforce.bo.SalesForceBoImpl;
-import com.ldchotels.util.PropertyBean;
+import com.ldchotels.util.SalesforceProperty;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 import com.sforce.async.*;
@@ -23,7 +23,7 @@ public class TransactionDeleteAction extends ActionSupport implements Preparable
 	private static Logger logger = Logger.getLogger(TransactionDeleteAction.class.getName());
 
 	private Map<String, Object> session;
-	private PropertyBean propertyBean;
+	private SalesforceProperty sfProperty;
 	private Date delDepBegin;
 	private Date delDepEnd;
 	private boolean fileDelete = true;
@@ -43,11 +43,11 @@ public class TransactionDeleteAction extends ActionSupport implements Preparable
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");		
 			String fileName = sdf.format(now) + "_" + now.getTime() + ".csv";
 				
-			SalesForceBo sf = new SalesForceBoImpl(propertyBean);
-			String authorization = propertyBean.getAuthorization();
-			String userName = propertyBean.getUserName();
-			String password = propertyBean.getPassword();	
-			String fileDir = propertyBean.getFileDir();
+			SalesForceBo sf = new SalesForceBoImpl(sfProperty);
+			String authorization = sfProperty.getAuthorization();
+			String userName = sfProperty.getUserName();
+			String password = sfProperty.getPassword();	
+			String fileDir = sfProperty.getFileDir();
 			String filePath = fileDir + "Log_Del_Tran_" + fileName;
 
 			// For logging and waiting message
@@ -75,7 +75,7 @@ public class TransactionDeleteAction extends ActionSupport implements Preparable
 			// Delete Transactions in Salesforce.
 			ConcurrencyMode mode = (this.isSerial() ? ConcurrencyMode.Serial : ConcurrencyMode.Parallel);
 			sf.deleteInSF("Transaction__c", authorization, userName, password, filePath, "Transaction_Number__c", mode);
-			this.session.put(this.propertyBean.getTransactionResultFile(), filePath);
+			this.session.put(this.sfProperty.getTransactionResultFile(), filePath);
 			
 			// For logging and waiting message
 			long timeStamp = System.currentTimeMillis();
@@ -90,22 +90,22 @@ public class TransactionDeleteAction extends ActionSupport implements Preparable
 
     protected void finalize(){
     	if ((this.session != null) && (this.isFileDelete())) {
-    		File outputFile = new File(this.session.get(this.propertyBean.getAccountResultFile()).toString());
+    		File outputFile = new File(this.session.get(this.sfProperty.getAccountResultFile()).toString());
     		if (outputFile.exists() && outputFile.delete()){
     			logger.info("File deleted : " + outputFile.getAbsolutePath());
     		};
     		
-    		outputFile = new File(this.session.get(this.propertyBean.getReservationResultFile()).toString());
+    		outputFile = new File(this.session.get(this.sfProperty.getReservationResultFile()).toString());
     		if (outputFile.exists() && outputFile.delete()){
     			logger.info("File deleted : " + outputFile.getAbsolutePath());
     		};
     		
-    		outputFile = new File(this.session.get(this.propertyBean.getReservationCOResultFile()).toString());
+    		outputFile = new File(this.session.get(this.sfProperty.getReservationCOResultFile()).toString());
     		if (outputFile.exists() && outputFile.delete()){
     			logger.info("File deleted : " + outputFile.getAbsolutePath());
     		};
     		
-    		outputFile = new File(this.session.get(this.propertyBean.getTransactionResultFile()).toString());
+    		outputFile = new File(this.session.get(this.sfProperty.getTransactionResultFile()).toString());
     		if (outputFile.exists() && outputFile.delete()){
     			logger.info("File deleted : " + outputFile.getAbsolutePath());
     		};
@@ -127,11 +127,11 @@ public class TransactionDeleteAction extends ActionSupport implements Preparable
 	/* Preparable */
 	@Override
 	public void prepare() throws Exception {
-		if (this.propertyBean == null) {
+		if (this.sfProperty == null) {
 			WebApplicationContext cxt = WebApplicationContextUtils
 					.getRequiredWebApplicationContext(ServletActionContext
 							.getServletContext());
-			this.propertyBean = (PropertyBean) cxt.getBean("propertyBean");
+			this.sfProperty = (SalesforceProperty) cxt.getBean("sfProperty");
 		}
 	}
 
