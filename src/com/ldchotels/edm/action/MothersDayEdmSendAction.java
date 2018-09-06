@@ -9,15 +9,15 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
-import com.ldchotels.edm.controller.BirthdayEdmSender;
+import com.ldchotels.edm.controller.HolidayEdmSender;
 import com.ldchotels.util.EdmProperty;
 
-public class BirthdayEdmSendAction extends ActionSupport implements Preparable, SessionAware {
+public class MothersDayEdmSendAction extends ActionSupport implements Preparable, SessionAware {
 	private static final long serialVersionUID = 1L;
 	private Map<String, Object> session;
 	private EdmProperty edmProperty;
 	
-	public BirthdayEdmSendAction() {
+	public MothersDayEdmSendAction() {
 		super();
 	}
 
@@ -25,10 +25,10 @@ public class BirthdayEdmSendAction extends ActionSupport implements Preparable, 
 	@Override
 	public String execute() throws Exception {
 		String returnValue = SUCCESS;
-		BirthdayEdmSender edmSender = new BirthdayEdmSender(edmProperty.getBirthdayEdmSubject(), 
-				edmProperty.getBirthdayEdmUrl(), edmProperty.getBirthdayEdmList(), 
-				edmProperty.isBirthdayReadFile(), edmProperty.isBirthdayReadDB(), 
-				edmProperty.isBirthdayActiveSend(), edmProperty.getSleepMillisecond());
+		HolidayEdmSender edmSender = new HolidayEdmSender(edmProperty.getMothersDayEdmSubject(), 
+				edmProperty.getMothersDayEdmUrl(), edmProperty.getMothersDayEdmList(), 
+				edmProperty.isMothersDayReadFile(), edmProperty.isMothersDayReadDB(), 
+				edmProperty.isMothersDayActiveSend(), edmProperty.getSleepMillisecond());
 		edmSender.start();	
 		return returnValue;
 	}

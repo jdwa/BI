@@ -28,6 +28,60 @@
       <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
       <put-attribute name="body" value="/pages/edm/action/birthdayEdmSendResult.jsp"/>      
   </definition>
+
+  <definition name="pages.edm.action.chineseNewYearEdmSendInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/chineseNewYearEdmSendInput.jsp"/>      
+  </definition>
+  <definition name="pages.edm.action.chineseNewYearEdmSendResult.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/chineseNewYearEdmSendResult.jsp"/>      
+  </definition>
+
+  <definition name="pages.edm.action.christmasEdmSendInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/christmasEdmSendInput.jsp"/>      
+  </definition>
+  <definition name="pages.edm.action.christmasEdmSendResult.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/christmasEdmSendResult.jsp"/>      
+  </definition>
+
+  <definition name="pages.edm.action.dragonBoatEdmSendInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/dragonBoatEdmSendInput.jsp"/>      
+  </definition>
+  <definition name="pages.edm.action.dragonBoatEdmSendResult.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/dragonBoatEdmSendResult.jsp"/>      
+  </definition>
+
+  <definition name="pages.edm.action.fathersDayEdmSendInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/fathersDayEdmSendInput.jsp"/>      
+  </definition>
+  <definition name="pages.edm.action.fathersDayEdmSendResult.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/fathersDayEdmSendResult.jsp"/>      
+  </definition>
+  
+  <definition name="pages.edm.action.middleMoonEdmSendInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/middleMoonEdmSendInput.jsp"/>      
+  </definition>
+  <definition name="pages.edm.action.middleMoonEdmSendResult.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/middleMoonEdmSendResult.jsp"/>      
+  </definition>
+  
+  <definition name="pages.edm.action.mothersDayEdmSendInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/mothersDayEdmSendInput.jsp"/>      
+  </definition>
+  <definition name="pages.edm.action.mothersDayEdmSendResult.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/mothersDayEdmSendResult.jsp"/>      
+  </definition>
     
    <!-- Protel -->
   <definition name="pages.protel.action.queryKundenInput.tiles" extends="baseLayout">  

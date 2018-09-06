@@ -17,6 +17,7 @@ public abstract class Employee implements Serializable {
 	private String mail_addr;
 	private Date birth_dat;
 	private Date enter_dat;
+	private Date quit_dat;
 		
 	@Id
 	@Column(name = "pers_ser", unique = true)
@@ -65,5 +66,13 @@ public abstract class Employee implements Serializable {
 	}
 	public void setEnter_dat(Date enter_dat) {
 		this.enter_dat = enter_dat;
+	}
+	
+	@Column(name = "quit_dat")
+	public Date getQuit_dat() {
+		return quit_dat;
+	}
+	public void setQuit_dat(Date quit_dat) {
+		this.quit_dat = quit_dat;
 	}
 }

@@ -4,10 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ldchotels.athena.model.Employee;
+import com.ldchotels.athena.model.EmployeeKH;
 
 public class EmployeeKHDaoImpl extends HibernateDaoSupport implements EmployeeDao {
 
@@ -35,8 +38,10 @@ public class EmployeeKHDaoImpl extends HibernateDaoSupport implements EmployeeDa
 	@Override
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
-	public List<Employee> list(Date birth_dat) {
-		logger.info("Criteria : Employee birthday = [" + birth_dat + "]");
-		return (List<Employee>) getHibernateTemplate().find("from EmployeeKH where birth_dat = '" + birth_dat + "'");
+	public List<Employee> employedList(Date evaluate_dat) {
+		Criteria criteria = getSession().createCriteria(EmployeeKH.class);	  
+	    criteria.add(Restrictions.or(Restrictions.isNull("quit_dat"), Restrictions.gt("quit_dat", evaluate_dat)));
+		logger.info("Criteria : Employee quit date is Null or after [" + evaluate_dat + "]");
+		return (List<Employee>) criteria.list();
 	}
 }

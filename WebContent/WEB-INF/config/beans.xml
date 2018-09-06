@@ -18,6 +18,7 @@
             <list>
                 <value>/WEB-INF/config/system.properties</value>
                 <value>/WEB-INF/config/salesforce.properties</value>
+                <value>/WEB-INF/config/mail.properties</value>
                 <value>/WEB-INF/config/edm.properties</value>
             </list>
         </property> 
@@ -64,7 +65,7 @@
 		</property>
 	</bean>
 
-	<bean id="edmProperty" class="com.ldchotels.util.EdmProperty">
+	<bean id="mailProperty" class="com.ldchotels.util.MailProperty">
 		<property name="mailHost">
 			<value>${mail.host}</value>
 		</property>
@@ -79,22 +80,149 @@
 		</property>
 		<property name="mailPwd">
 			<value>${mail.pwd}</value>
-		</property>
-		<property name="mailSleep">
-			<value>${mail.sleep}</value>
-		</property>		
-		<property name="mailFromName">
-			<value>${mail.fromName}</value>
 		</property>	
+		<property name="mailSender">
+			<value>${mail.sender}</value>
+		</property>	
+	</bean>
+		
+	<bean id="edmProperty" class="com.ldchotels.util.EdmProperty">
+		<property name="sleepMillisecond">
+			<value>${global.edm.sleep.milliseconds}</value>
+		</property>	
+		
+		<property name="birthdayActiveSend">
+			<value>${birthday.edm.active.mode}</value>
+		</property>
+		<property name="birthdayReadDB">
+			<value>${birthday.edm.list.from.db}</value>
+		</property>
+		<property name="birthdayReadFile">
+			<value>${birthday.edm.list.from.file}</value>
+		</property>						
 		<property name="birthdayEdmList">
-			<value>${birthday.edm.List}</value>
+			<value>${birthday.edm.list}</value>
 		</property>			
 		<property name="birthdayEdmUrl">
-			<value>${birthday.edm.Url}</value>
+			<value>${birthday.edm.url}</value>
 		</property>			
 		<property name="birthdayEdmSubject">
-			<value>${birthday.edm.Subject}</value>
-		</property>							
+			<value>${birthday.edm.subject}</value>
+		</property>		
+		
+		<property name="chineseNewYearActiveSend">
+			<value>${chineseNewYear.edm.active.mode}</value>
+		</property>
+		<property name="chineseNewYearReadDB">
+			<value>${chineseNewYear.edm.list.from.db}</value>
+		</property>
+		<property name="chineseNewYearReadFile">
+			<value>${chineseNewYear.edm.list.from.file}</value>
+		</property>						
+		<property name="chineseNewYearEdmList">
+			<value>${chineseNewYear.edm.list}</value>
+		</property>			
+		<property name="chineseNewYearEdmUrl">
+			<value>${chineseNewYear.edm.url}</value>
+		</property>			
+		<property name="chineseNewYearEdmSubject">
+			<value>${chineseNewYear.edm.subject}</value>
+		</property>
+
+		<property name="christmasActiveSend">
+			<value>${christmas.edm.active.mode}</value>
+		</property>
+		<property name="christmasReadDB">
+			<value>${christmas.edm.list.from.db}</value>
+		</property>
+		<property name="christmasReadFile">
+			<value>${christmas.edm.list.from.file}</value>
+		</property>						
+		<property name="christmasEdmList">
+			<value>${christmas.edm.list}</value>
+		</property>			
+		<property name="christmasEdmUrl">
+			<value>${christmas.edm.url}</value>
+		</property>			
+		<property name="christmasEdmSubject">
+			<value>${christmas.edm.subject}</value>
+		</property>
+		
+		<property name="dragonBoatActiveSend">
+			<value>${dragonBoat.edm.active.mode}</value>
+		</property>
+		<property name="dragonBoatReadDB">
+			<value>${dragonBoat.edm.list.from.db}</value>
+		</property>
+		<property name="dragonBoatReadFile">
+			<value>${dragonBoat.edm.list.from.file}</value>
+		</property>						
+		<property name="dragonBoatEdmList">
+			<value>${dragonBoat.edm.list}</value>
+		</property>			
+		<property name="dragonBoatEdmUrl">
+			<value>${dragonBoat.edm.url}</value>
+		</property>			
+		<property name="dragonBoatEdmSubject">
+			<value>${dragonBoat.edm.subject}</value>
+		</property>
+		
+		<property name="fathersDayActiveSend">
+			<value>${fathersDay.edm.active.mode}</value>
+		</property>
+		<property name="fathersDayReadDB">
+			<value>${fathersDay.edm.list.from.db}</value>
+		</property>
+		<property name="fathersDayReadFile">
+			<value>${fathersDay.edm.list.from.file}</value>
+		</property>						
+		<property name="fathersDayEdmList">
+			<value>${fathersDay.edm.list}</value>
+		</property>			
+		<property name="fathersDayEdmUrl">
+			<value>${fathersDay.edm.url}</value>
+		</property>			
+		<property name="fathersDayEdmSubject">
+			<value>${fathersDay.edm.subject}</value>
+		</property>		
+		
+		<property name="middleMoonActiveSend">
+			<value>${middleMoon.edm.active.mode}</value>
+		</property>
+		<property name="middleMoonReadDB">
+			<value>${middleMoon.edm.list.from.db}</value>
+		</property>
+		<property name="middleMoonReadFile">
+			<value>${middleMoon.edm.list.from.file}</value>
+		</property>						
+		<property name="middleMoonEdmList">
+			<value>${middleMoon.edm.list}</value>
+		</property>			
+		<property name="middleMoonEdmUrl">
+			<value>${middleMoon.edm.url}</value>
+		</property>			
+		<property name="middleMoonEdmSubject">
+			<value>${middleMoon.edm.subject}</value>
+		</property>		
+
+		<property name="mothersDayActiveSend">
+			<value>${mothersDay.edm.active.mode}</value>
+		</property>
+		<property name="mothersDayReadDB">
+			<value>${mothersDay.edm.list.from.db}</value>
+		</property>
+		<property name="mothersDayReadFile">
+			<value>${mothersDay.edm.list.from.file}</value>
+		</property>						
+		<property name="mothersDayEdmList">
+			<value>${mothersDay.edm.list}</value>
+		</property>			
+		<property name="mothersDayEdmUrl">
+			<value>${mothersDay.edm.url}</value>
+		</property>			
+		<property name="mothersDayEdmSubject">
+			<value>${mothersDay.edm.subject}</value>
+		</property>									
 	</bean>
  
  	<!-- 
@@ -109,24 +237,116 @@
 	*** Scheduler Job Beans ***
 	***************************
 	-->
-    <!-- For times when you need more complex processing, passing data to the scheduled job -->
+    <!-- ****** For BirthdchineseNewYearuled job ****** -->
     <bean name="birthdayEdmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
         <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.BirthdayEdmSendScheduledJob" />
         <property name="jobDataMap">
             <map>
-                <entry key="sfProperty" value-ref="sfProperty" />
+                <entry key="edmProperty" value-ref="edmProperty" />
             </map>
         </property>
         <property name="durability" value="true" />
     </bean>
-
-    <!-- Run the job by cron expression defined -->
     <bean id="birthdayEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="birthdayEdmSendJobDetail" />
-        <!-- Seconds   Minutes   Hours    Day-of-Month      Month          Day-of-Week         Year(optional field) 
-        <property name="cronExpression" value="0/30 * * * * ?" />
-        -->
-        <property name="cronExpression" value="0 0 10 * * ?" />
+        <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
+        <property name="cronExpression" value="0 0 10 * * ?" /> <!-- 每天早上十點執行 -->
+    </bean>
+
+    <!-- ****** For Chinese New Year scheduled job ****** -->
+    <bean name="chineseNewYearEdmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.ChineseNewYearEdmSendScheduledJob" />
+        <property name="jobDataMap">
+            <map>
+                <entry key="edmProperty" value-ref="edmProperty" />
+            </map>
+        </property>
+        <property name="durability" value="true" />
+    </bean>
+    <bean id="chineseNewYearEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="chineseNewYearEdmSendJobDetail" />
+        <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
+        <property name="cronExpression" value="0 0 10 * * ?" /> <!-- 每天早上十點執行 -->
+    </bean>
+
+    <!-- ****** For Christmas scheduled job ****** -->
+    <bean name="christmasEdmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.ChristmasEdmSendScheduledJob" />
+        <property name="jobDataMap">
+            <map>
+                <entry key="edmProperty" value-ref="edmProperty" />
+            </map>
+        </property>
+        <property name="durability" value="true" />
+    </bean>
+    <bean id="christmasEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="christmasEdmSendJobDetail" />
+        <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
+        <property name="cronExpression" value="0 0 10 * * ?" /> <!-- 每天早上十點執行 -->
+    </bean>
+
+    <!-- ****** For Dragon Boat scheduled job ****** -->
+    <bean name="dragonBoatEdmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.DragonBoatEdmSendScheduledJob" />
+        <property name="jobDataMap">
+            <map>
+                <entry key="edmProperty" value-ref="edmProperty" />
+            </map>
+        </property>
+        <property name="durability" value="true" />
+    </bean>
+    <bean id="dragonBoatEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="dragonBoatEdmSendJobDetail" />
+        <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
+        <property name="cronExpression" value="0 0 10 * * ?" /> <!-- 每天早上十點執行 -->
+    </bean>
+
+    <!-- ****** For Fathers' Day scheduled job ****** -->
+    <bean name="fathersDayEdmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.FathersDayEdmSendScheduledJob" />
+        <property name="jobDataMap">
+            <map>
+                <entry key="edmProperty" value-ref="edmProperty" />
+            </map>
+        </property>
+        <property name="durability" value="true" />
+    </bean>
+    <bean id="fathersDayEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="fathersDayEdmSendJobDetail" />
+        <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
+        <property name="cronExpression" value="0 0 10 * * ?" /> <!-- 每天早上十點執行 -->
+    </bean>
+
+    <!-- ****** For Middle Moon scheduled job ****** -->
+    <bean name="middleMoonEdmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.MiddleMoonEdmSendScheduledJob" />
+        <property name="jobDataMap">
+            <map>
+                <entry key="edmProperty" value-ref="edmProperty" />
+            </map>
+        </property>
+        <property name="durability" value="true" />
+    </bean>
+    <bean id="middleMoonEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="middleMoonEdmSendJobDetail" />
+        <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
+        <property name="cronExpression" value="0 0 10 * * ?" /> <!-- 每天早上十點執行 -->
+    </bean>
+
+    <!-- ****** For Middle Moon scheduled job ****** -->
+    <bean name="mothersDayEdmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.MothersDayEdmSendScheduledJob" />
+        <property name="jobDataMap">
+            <map>
+                <entry key="edmProperty" value-ref="edmProperty" />
+            </map>
+        </property>
+        <property name="durability" value="true" />
+    </bean>
+    <bean id="mothersDayEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="mothersDayEdmSendJobDetail" />
+        <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
+        <property name="cronExpression" value="0 0 10 * * ?" /> <!-- 每天早上十點執行 -->
     </bean>
 
     <!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->
@@ -134,12 +354,23 @@
         <property name="jobDetails">
             <list>
                 <ref bean="birthdayEdmSendJobDetail" />
+                <ref bean="chineseNewYearEdmSendJobDetail" />
+                <ref bean="christmasEdmSendJobDetail" />
+                <ref bean="dragonBoatEdmSendJobDetail" />
+                <ref bean="fathersDayEdmSendJobDetail" />
+                <ref bean="middleMoonEdmSendJobDetail" />
+                <ref bean="mothersDayEdmSendJobDetail" />
             </list>
         </property>
- 
-        <property name="triggers">
+         <property name="triggers">
             <list>
                 <ref bean="birthdayEdmSendCronTrigger" />
+                <ref bean="chineseNewYearEdmSendCronTrigger" />
+                <ref bean="christmasEdmSendCronTrigger" />
+                <ref bean="dragonBoatEdmSendCronTrigger" />
+                <ref bean="fathersDayEdmSendCronTrigger" />
+                <ref bean="middleMoonEdmSendCronTrigger" />
+                <ref bean="mothersDayEdmSendCronTrigger" />           
             </list>
         </property>
     </bean>

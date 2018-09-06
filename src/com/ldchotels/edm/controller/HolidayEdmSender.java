@@ -18,8 +18,8 @@ import com.ldchotels.edm.http.WebPageReader;
 import com.ldchotels.edm.mail.thread.MailSender;
 import com.ldchotels.util.ApplicationContextProvider;
 
-public class BirthdayEdmSender extends java.lang.Thread {
-	private static Logger logger = Logger.getLogger(BirthdayEdmSender.class.getName());
+public class HolidayEdmSender extends java.lang.Thread {
+	private static Logger logger = Logger.getLogger(HolidayEdmSender.class.getName());
 	
 	private String subject;
 	private String edmUrl;
@@ -31,7 +31,7 @@ public class BirthdayEdmSender extends java.lang.Thread {
 	ArrayList<String> toList;
 
 
-	public BirthdayEdmSender(String subject, String edmUrl, String edmList, 
+	public HolidayEdmSender(String subject, String edmUrl, String edmList, 
 			boolean isReadFile, boolean isReadDB, boolean isActive, int sleepMillisecond) throws Exception {
 		super();
 		this.subject = subject;
@@ -163,14 +163,7 @@ public class BirthdayEdmSender extends java.lang.Thread {
     				List<Employee> employeeList = employeeDao.employedList(now.getTime());
     				logger.info("Currently total employed : [" + employeeList.size() + "]");
     				for(int i = 0 ; i < employeeList.size(); i++){
-    					Calendar birthday = Calendar.getInstance();
-    					birthday.setTime(employeeList.get(i).getBirth_dat());
-    					if ((birthday.get(Calendar.MONTH) == now.get(Calendar.MONTH)) 
-    						&& (birthday.get(Calendar.DAY_OF_MONTH) == now.get(Calendar.DAY_OF_MONTH))
-    						&& (!list.contains(employeeList.get(i).getMail_addr().trim()))){
-    						list.add(employeeList.get(i).getMail_addr().trim());
-    						logger.info("Birthday MM-DD : [" + employeeList.get(i).getPers_nam() + "][" + (birthday.get(Calendar.MONTH) + 1) + "-" + birthday.get(Calendar.DAY_OF_MONTH) + "]");
-    					}
+    					list.add(employeeList.get(i).getMail_addr().trim());
     				}
     			}
     		} catch(Exception e) {

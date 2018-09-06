@@ -5,22 +5,22 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
-import com.ldchotels.edm.controller.BirthdayEdmSender;
+import com.ldchotels.edm.controller.HolidayEdmSender;
 import com.ldchotels.util.EdmProperty;
 
-public class BirthdayEdmSendScheduledJob extends QuartzJobBean {
+public class FathersDayEdmSendScheduledJob extends QuartzJobBean {
 	
-	private static Logger logger = Logger.getLogger(BirthdayEdmSendScheduledJob.class.getName());
+	private static Logger logger = Logger.getLogger(FathersDayEdmSendScheduledJob.class.getName());
 	private EdmProperty edmProperty;
 	
 	@Override
 	protected void executeInternal(JobExecutionContext ctx)	throws JobExecutionException {
-		logger.info("[BirthdayEdmSendScheduledJob][executeInternal]");
+		logger.info("[FathersDayEdmSendScheduledJob][executeInternal]");
 		try {
-			BirthdayEdmSender edmSender = new BirthdayEdmSender(edmProperty.getBirthdayEdmSubject(), 
-					edmProperty.getBirthdayEdmUrl(), edmProperty.getBirthdayEdmList(), 
-					edmProperty.isBirthdayReadFile(), edmProperty.isBirthdayReadDB(), 
-					edmProperty.isBirthdayActiveSend(), edmProperty.getSleepMillisecond());
+			HolidayEdmSender edmSender = new HolidayEdmSender(edmProperty.getFathersDayEdmSubject(), 
+					edmProperty.getFathersDayEdmUrl(), edmProperty.getFathersDayEdmList(), 
+					edmProperty.isFathersDayReadFile(), edmProperty.isFathersDayReadDB(), 
+					edmProperty.isFathersDayActiveSend(), edmProperty.getSleepMillisecond());
 			edmSender.start();
 		} catch (Exception e) {
 			logger.info(e.getMessage());

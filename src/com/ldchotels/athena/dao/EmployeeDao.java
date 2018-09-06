@@ -14,5 +14,5 @@ public interface EmployeeDao {
 	public Employee update(Employee employee);
 	--*/
 	public List<Employee> list();
-	public List<Employee> list(Date birth_dat);
+	public List<Employee> employedList(Date evaluate_dat);
 }

@@ -31,6 +31,12 @@
 			<s:set name="menu.edm.system"><s:text name="menu.edm.system" /></s:set>
 			<sj:accordionItem title="%{menu.edm.system}">
 				<sj:div><a href="BirthdayEdmSendAction.input.action"><s:text name="action.birthday.edm.send" /></a></sj:div>	
+				<sj:div><a href="DragonBoatEdmSendAction.input.action"><s:text name="action.dragonBoat.edm.send" /></a></sj:div>	
+				<sj:div><a href="MiddleMoonEdmSendAction.input.action"><s:text name="action.middleMoon.edm.send" /></a></sj:div>	
+				<sj:div><a href="ChristmasEdmSendAction.input.action"><s:text name="action.christmas.edm.send" /></a></sj:div>	
+				<sj:div><a href="ChineseNewYearEdmSendAction.input.action"><s:text name="action.chineseNewYear.edm.send" /></a></sj:div>	
+				<sj:div><a href="FathersDayEdmSendAction.input.action"><s:text name="action.fathersDay.edm.send" /></a></sj:div>	
+				<sj:div><a href="MothersDayEdmSendAction.input.action"><s:text name="action.mothersDay.edm.send" /></a></sj:div>	
 			</sj:accordionItem>
 			<s:set name="menu.protel.system"><s:text name="menu.protel.system" /></s:set>
 			<sj:accordionItem title="%{menu.protel.system}">
