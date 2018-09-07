@@ -134,13 +134,13 @@
       <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
       <put-attribute name="body" value="/pages/salesforce/action/downloadResultFiles.jsp"/>      
   </definition>
-  <definition name="pages.salesforce.action.wait.tiles" extends="baseLayout">  
+  
+  <!-- ***************************************************************************************** -->
+  <!-- System -->
+  <definition name="pages.system.action.wait.tiles" extends="baseLayout">  
       <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
       <put-attribute name="body" value="/pages/wait.jsp"/>      
   </definition>
-  
-  <!-- ***************************************************************************************** -->
-  
   <definition name="pages.system.action.initializeData.tiles" extends="baseLayout">
       <put-attribute name="body" value="/pages/system/action/initializeData.jsp"/>      
   </definition>

@@ -9,7 +9,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
-import com.ldchotels.edm.controller.HolidayEdmSender;
+import com.ldchotels.edm.controller.ChineseNewYearEdmSender;
 import com.ldchotels.util.EdmProperty;
 
 public class ChineseNewYearEdmSendAction extends ActionSupport implements Preparable, SessionAware {
@@ -25,11 +25,12 @@ public class ChineseNewYearEdmSendAction extends ActionSupport implements Prepar
 	@Override
 	public String execute() throws Exception {
 		String returnValue = SUCCESS;
-		HolidayEdmSender edmSender = new HolidayEdmSender(edmProperty.getChineseNewYearEdmSubject(), 
+		ChineseNewYearEdmSender edmSender = new ChineseNewYearEdmSender(edmProperty.getChineseNewYearEdmSubject(), 
 				edmProperty.getChineseNewYearEdmUrl(), edmProperty.getChineseNewYearEdmList(), 
 				edmProperty.isChineseNewYearReadFile(), edmProperty.isChineseNewYearReadDB(), 
 				edmProperty.isChineseNewYearActiveSend(), edmProperty.getSleepMillisecond());
-		edmSender.start();	
+		edmSender.setAction(this);
+		edmSender.run();	
 		return returnValue;
 	}
 

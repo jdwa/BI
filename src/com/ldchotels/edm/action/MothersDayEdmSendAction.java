@@ -9,7 +9,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
-import com.ldchotels.edm.controller.HolidayEdmSender;
+import com.ldchotels.edm.controller.MothersDayEdmSender;
 import com.ldchotels.util.EdmProperty;
 
 public class MothersDayEdmSendAction extends ActionSupport implements Preparable, SessionAware {
@@ -25,11 +25,12 @@ public class MothersDayEdmSendAction extends ActionSupport implements Preparable
 	@Override
 	public String execute() throws Exception {
 		String returnValue = SUCCESS;
-		HolidayEdmSender edmSender = new HolidayEdmSender(edmProperty.getMothersDayEdmSubject(), 
+		MothersDayEdmSender edmSender = new MothersDayEdmSender(edmProperty.getMothersDayEdmSubject(), 
 				edmProperty.getMothersDayEdmUrl(), edmProperty.getMothersDayEdmList(), 
 				edmProperty.isMothersDayReadFile(), edmProperty.isMothersDayReadDB(), 
 				edmProperty.isMothersDayActiveSend(), edmProperty.getSleepMillisecond());
-		edmSender.start();	
+		edmSender.setAction(this);
+		edmSender.run();	
 		return returnValue;
 	}
 

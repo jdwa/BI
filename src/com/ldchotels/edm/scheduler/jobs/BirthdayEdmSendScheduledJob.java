@@ -21,7 +21,7 @@ public class BirthdayEdmSendScheduledJob extends QuartzJobBean {
 					edmProperty.getBirthdayEdmUrl(), edmProperty.getBirthdayEdmList(), 
 					edmProperty.isBirthdayReadFile(), edmProperty.isBirthdayReadDB(), 
 					edmProperty.isBirthdayActiveSend(), edmProperty.getSleepMillisecond());
-			edmSender.start();
+			edmSender.run();
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 			e.printStackTrace();

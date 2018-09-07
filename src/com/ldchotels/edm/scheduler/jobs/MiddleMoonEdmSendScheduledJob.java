@@ -5,7 +5,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
-import com.ldchotels.edm.controller.HolidayEdmSender;
+import com.ldchotels.edm.controller.MiddleMoonEdmSender;
 import com.ldchotels.util.EdmProperty;
 
 public class MiddleMoonEdmSendScheduledJob extends QuartzJobBean {
@@ -17,11 +17,11 @@ public class MiddleMoonEdmSendScheduledJob extends QuartzJobBean {
 	protected void executeInternal(JobExecutionContext ctx)	throws JobExecutionException {
 		logger.info("[MiddleMoonEdmSendScheduledJob][executeInternal]");
 		try {
-			HolidayEdmSender edmSender = new HolidayEdmSender(edmProperty.getMiddleMoonEdmSubject(), 
+			MiddleMoonEdmSender edmSender = new MiddleMoonEdmSender(edmProperty.getMiddleMoonEdmSubject(), 
 					edmProperty.getMiddleMoonEdmUrl(), edmProperty.getMiddleMoonEdmList(), 
 					edmProperty.isMiddleMoonReadFile(), edmProperty.isMiddleMoonReadDB(), 
 					edmProperty.isMiddleMoonActiveSend(), edmProperty.getSleepMillisecond());
-			edmSender.start();
+			edmSender.run();
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 			e.printStackTrace();

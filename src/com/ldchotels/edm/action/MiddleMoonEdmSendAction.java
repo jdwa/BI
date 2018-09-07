@@ -9,7 +9,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
-import com.ldchotels.edm.controller.HolidayEdmSender;
+import com.ldchotels.edm.controller.MiddleMoonEdmSender;
 import com.ldchotels.util.EdmProperty;
 
 public class MiddleMoonEdmSendAction extends ActionSupport implements Preparable, SessionAware {
@@ -25,11 +25,12 @@ public class MiddleMoonEdmSendAction extends ActionSupport implements Preparable
 	@Override
 	public String execute() throws Exception {
 		String returnValue = SUCCESS;
-		HolidayEdmSender edmSender = new HolidayEdmSender(edmProperty.getMiddleMoonEdmSubject(), 
+		MiddleMoonEdmSender edmSender = new MiddleMoonEdmSender(edmProperty.getMiddleMoonEdmSubject(), 
 				edmProperty.getMiddleMoonEdmUrl(), edmProperty.getMiddleMoonEdmList(), 
 				edmProperty.isMiddleMoonReadFile(), edmProperty.isMiddleMoonReadDB(), 
 				edmProperty.isMiddleMoonActiveSend(), edmProperty.getSleepMillisecond());
-		edmSender.start();	
+		edmSender.setAction(this);
+		edmSender.run();	
 		return returnValue;
 	}
 

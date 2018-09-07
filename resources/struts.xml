@@ -99,6 +99,12 @@
 				<result name="input" type="tiles">pages.edm.action.birthdayEdmSendInput.tiles</result>
 			</action>		
 			<action name="BirthdayEdmSendAction" class="com.ldchotels.edm.action.BirthdayEdmSendAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.edm.action.birthdayEdmSendResult.tiles</result>
 			</action>
 
@@ -107,6 +113,12 @@
 				<result name="input" type="tiles">pages.edm.action.chineseNewYearEdmSendInput.tiles</result>
 			</action>		
 			<action name="ChineseNewYearEdmSendAction" class="com.ldchotels.edm.action.ChineseNewYearEdmSendAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.edm.action.chineseNewYearEdmSendResult.tiles</result>
 			</action>
 
@@ -115,6 +127,12 @@
 				<result name="input" type="tiles">pages.edm.action.christmasEdmSendInput.tiles</result>
 			</action>		
 			<action name="ChristmasEdmSendAction" class="com.ldchotels.edm.action.ChristmasEdmSendAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.edm.action.christmasEdmSendResult.tiles</result>
 			</action>
 
@@ -123,6 +141,12 @@
 				<result name="input" type="tiles">pages.edm.action.dragonBoatEdmSendInput.tiles</result>
 			</action>		
 			<action name="DragonBoatEdmSendAction" class="com.ldchotels.edm.action.DragonBoatEdmSendAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.edm.action.dragonBoatEdmSendResult.tiles</result>
 			</action>
 
@@ -131,6 +155,12 @@
 				<result name="input" type="tiles">pages.edm.action.fathersDayEdmSendInput.tiles</result>
 			</action>		
 			<action name="FathersDayEdmSendAction" class="com.ldchotels.edm.action.FathersDayEdmSendAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.edm.action.fathersDayEdmSendResult.tiles</result>
 			</action>
 
@@ -139,6 +169,12 @@
 				<result name="input" type="tiles">pages.edm.action.middleMoonEdmSendInput.tiles</result>
 			</action>		
 			<action name="MiddleMoonEdmSendAction" class="com.ldchotels.edm.action.MiddleMoonEdmSendAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.edm.action.middleMoonEdmSendResult.tiles</result>
 			</action>
 
@@ -147,6 +183,12 @@
 				<result name="input" type="tiles">pages.edm.action.mothersDayEdmSendInput.tiles</result>
 			</action>		
 			<action name="MothersDayEdmSendAction" class="com.ldchotels.edm.action.MothersDayEdmSendAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.edm.action.mothersDayEdmSendResult.tiles</result>
 			</action>
 		
@@ -172,7 +214,7 @@
 			        <param name="delay">1000</param>
 			        <param name="delaySleepInterval">1000</param>
 		    	</interceptor-ref>
-		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
 			</action>
 
@@ -187,7 +229,7 @@
 			        <param name="delay">1000</param>
 			        <param name="delaySleepInterval">1000</param>
 		    	</interceptor-ref>
-		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
 			</action>
 
@@ -202,7 +244,7 @@
 			        <param name="delay">1000</param>
 			        <param name="delaySleepInterval">1000</param>
 		    	</interceptor-ref>
-		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
 			</action>
 						
@@ -217,7 +259,7 @@
 			        <param name="delay">1000</param>
 			        <param name="delaySleepInterval">1000</param>
 		    	</interceptor-ref>
-		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
 			</action>
 			
@@ -232,7 +274,7 @@
 			        <param name="delay">1000</param>
 			        <param name="delaySleepInterval">1000</param>
 		    	</interceptor-ref>
-		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
 			</action>
 
@@ -247,7 +289,7 @@
 			        <param name="delay">1000</param>
 			        <param name="delaySleepInterval">1000</param>
 		    	</interceptor-ref>
-		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
 			</action>
 
@@ -262,7 +304,7 @@
 			        <param name="delay">1000</param>
 			        <param name="delaySleepInterval">1000</param>
 		    	</interceptor-ref>
-		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
 			</action>
 			
@@ -277,7 +319,7 @@
 			        <param name="delay">1000</param>
 			        <param name="delaySleepInterval">1000</param>
 		    	</interceptor-ref>
-		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
 			</action>
 
@@ -292,7 +334,7 @@
 			        <param name="delay">1000</param>
 			        <param name="delaySleepInterval">1000</param>
 		    	</interceptor-ref>
-		    	<result name="wait" type="tiles">pages.salesforce.action.wait.tiles</result>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.salesforce.action.result.files.download.tiles</result>
 			</action>
 									

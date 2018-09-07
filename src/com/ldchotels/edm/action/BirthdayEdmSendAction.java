@@ -29,7 +29,8 @@ public class BirthdayEdmSendAction extends ActionSupport implements Preparable, 
 				edmProperty.getBirthdayEdmUrl(), edmProperty.getBirthdayEdmList(), 
 				edmProperty.isBirthdayReadFile(), edmProperty.isBirthdayReadDB(), 
 				edmProperty.isBirthdayActiveSend(), edmProperty.getSleepMillisecond());
-		edmSender.start();	
+		edmSender.setAction(this);
+		edmSender.run();
 		return returnValue;
 	}
 

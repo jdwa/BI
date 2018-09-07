@@ -5,7 +5,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
-import com.ldchotels.edm.controller.HolidayEdmSender;
+import com.ldchotels.edm.controller.ChineseNewYearEdmSender;
 import com.ldchotels.util.EdmProperty;
 
 public class ChineseNewYearEdmSendScheduledJob extends QuartzJobBean {
@@ -17,11 +17,11 @@ public class ChineseNewYearEdmSendScheduledJob extends QuartzJobBean {
 	protected void executeInternal(JobExecutionContext ctx)	throws JobExecutionException {
 		logger.info("[ChineseNewYearEdmSendScheduledJob][executeInternal]");
 		try {
-			HolidayEdmSender edmSender = new HolidayEdmSender(edmProperty.getChineseNewYearEdmSubject(), 
+			ChineseNewYearEdmSender edmSender = new ChineseNewYearEdmSender(edmProperty.getChineseNewYearEdmSubject(), 
 					edmProperty.getChineseNewYearEdmUrl(), edmProperty.getChineseNewYearEdmList(), 
 					edmProperty.isChineseNewYearReadFile(), edmProperty.isChineseNewYearReadDB(), 
 					edmProperty.isChineseNewYearActiveSend(), edmProperty.getSleepMillisecond());
-			edmSender.start();
+			edmSender.run();
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 			e.printStackTrace();

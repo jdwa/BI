@@ -17,23 +17,27 @@ import com.ldchotels.athena.model.Employee;
 import com.ldchotels.edm.http.WebPageReader;
 import com.ldchotels.edm.mail.thread.MailSender;
 import com.ldchotels.util.ApplicationContextProvider;
+import com.opensymphony.xwork2.ActionSupport;
 
-public class HolidayEdmSender extends java.lang.Thread {
-	private static Logger logger = Logger.getLogger(HolidayEdmSender.class.getName());
+public abstract class EdmSender {
+	protected Logger logger;
 	
-	private String subject;
-	private String edmUrl;
-	private String edmList;
-	private boolean isReadFile;
-	private boolean isReadDB;
-	private boolean isActive;
-	private int sleepMillisecond;
-	ArrayList<String> toList;
+	protected ActionSupport action;
+	protected String subject;
+	protected String edmUrl;
+	protected String edmList;
+	protected boolean isReadFile;
+	protected boolean isReadDB;
+	protected boolean isActive;
+	protected int sleepMillisecond;
+	protected ArrayList<String> toList;
 
-
-	public HolidayEdmSender(String subject, String edmUrl, String edmList, 
+	public EdmSender(String subject, String edmUrl, String edmList, 
 			boolean isReadFile, boolean isReadDB, boolean isActive, int sleepMillisecond) throws Exception {
 		super();
+		logger = Logger.getLogger(this.getClass().getName());
+		logger.info("[" + this.getClass().getName() + "] created ...");
+		this.action = null;
 		this.subject = subject;
 		this.edmUrl = edmUrl;
 		this.edmList = edmList;
@@ -43,9 +47,12 @@ public class HolidayEdmSender extends java.lang.Thread {
 		this.sleepMillisecond = sleepMillisecond;
 		this.toList = new ArrayList<String>();
 	}
+	
+	protected void finalize ()  {
+		logger.info("[" + this.getClass().getName() + "] finalized ...");
+    }
 
 	public void run() {
-		//String subject = this.edmProperty.getBirthdayEdmSubject();
 		String content = "*** Edm content not yet ready ! ***";
 
 		if (this.isReadFile){
@@ -62,12 +69,14 @@ public class HolidayEdmSender extends java.lang.Thread {
 			content = web.getContent();
 		} else {
 			logger.error("Get web page error !");
+			if (action != null) action.addActionError("Get web page error !");
 		}
 
 		FileWriter fw = null;
 		try {
 			for (int i = 0; i < toList.size(); i++) {
 				logger.info("Send to : [" + toList.get(i) + "], Subject : [" + subject + "]");
+				if (action != null) action.addActionMessage("Send to : [" + toList.get(i) + "], Subject : [" + subject + "]"); 
 				if (this.isActive) {
 					// 啟動thread開始寄信
 					MailSender sender = new MailSender(toList.get(i), subject, content);
@@ -76,6 +85,7 @@ public class HolidayEdmSender extends java.lang.Thread {
 					Thread.sleep(this.sleepMillisecond);
 				} else {
 					logger.info("Send mode OFF, no EDM send!");
+					if (action != null) action.addActionMessage("Send mode OFF, no EDM send!");
 				}
 
 				if (fw != null) {
@@ -95,12 +105,13 @@ public class HolidayEdmSender extends java.lang.Thread {
 					fw = null;
 				} catch (IOException ioex) {
 					logger.error(ioex.getMessage());
+					if (action != null) action.addActionError(ioex.getMessage());
 				}
 			}
 		}
 	}
 	
-	private ArrayList<String> prepareFileList() {
+	protected ArrayList<String> prepareFileList() {
 		ArrayList<String> list = new ArrayList<String>();
 		FileReader fis = null;
 		BufferedReader bis = null;
@@ -133,12 +144,13 @@ public class HolidayEdmSender extends java.lang.Thread {
 				}	
 			} catch (IOException ioex) {
 				logger.error(ioex.getMessage());
+				if (action != null) action.addActionError(ioex.getMessage());
 			}
 		}
 		return list;
 	}
 	
-	private ArrayList<String> prepareDBList() {
+	protected ArrayList<String> prepareDBList() {
 		ArrayList<String> list = new ArrayList<String>();
 		EmployeeDao employeeDao;
 		Calendar now = Calendar.getInstance();
@@ -158,19 +170,30 @@ public class HolidayEdmSender extends java.lang.Thread {
         for (Object key : dbMap.keySet()) {
     		try {
     			logger.info("********** Procrssing " + key +" ***********");
+    			if (action != null) action.addActionMessage("********** Procrssing " + key +" ***********");
     			employeeDao = (EmployeeDao) dbMap.get(key);
     			if (employeeDao != null) {
     				List<Employee> employeeList = employeeDao.employedList(now.getTime());
     				logger.info("Currently total employed : [" + employeeList.size() + "]");
+    				if (action != null) action.addActionMessage("Currently total employed : [" + employeeList.size() + "]");
     				for(int i = 0 ; i < employeeList.size(); i++){
-    					list.add(employeeList.get(i).getMail_addr().trim());
+   						list.add(employeeList.get(i).getMail_addr().trim());
     				}
     			}
     		} catch(Exception e) {
     			logger.error(e.getMessage());
+    			if (action != null) action.addActionError(e.getMessage());
     		}
         }
 		
  		return list;
+	}
+
+	public ActionSupport getAction() {
+		return action;
+	}
+
+	public void setAction(ActionSupport action) {
+		this.action = action;
 	}
 }
