@@ -266,7 +266,7 @@
     <bean id="chineseNewYearEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="chineseNewYearEdmSendJobDetail" />
         <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
-        <property name="cronExpression" value="0 0 2 * * ?" />
+        <property name="cronExpression" value="0 0 2 31 1 ? 2299" />
     </bean>
 
     <!-- ****** For Christmas scheduled job ****** -->
@@ -282,7 +282,7 @@
     <bean id="christmasEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="christmasEdmSendJobDetail" />
         <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
-        <property name="cronExpression" value="0 0 3 * * ?" />
+        <property name="cronExpression" value="0 0 2 20 12 ? 2299" />
     </bean>
 
     <!-- ****** For Dragon Boat scheduled job ****** -->
@@ -298,7 +298,7 @@
     <bean id="dragonBoatEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="dragonBoatEdmSendJobDetail" />
         <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
-        <property name="cronExpression" value="0 0 4 * * ?" />
+        <property name="cronExpression" value="0 0 2 1 5 ? 2299" />
     </bean>
 
     <!-- ****** For Fathers' Day scheduled job ****** -->
@@ -314,7 +314,7 @@
     <bean id="fathersDayEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="fathersDayEdmSendJobDetail" />
         <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
-        <property name="cronExpression" value="0 0 5 * * ?" /> 
+        <property name="cronExpression" value="0 0 2 3 8 ? 2299" /> 
     </bean>
 
     <!-- ****** For Middle Moon scheduled job ****** -->
@@ -330,10 +330,10 @@
     <bean id="middleMoonEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="middleMoonEdmSendJobDetail" />
         <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
-        <property name="cronExpression" value="0 0 6 * * ?" />
+        <property name="cronExpression" value="0 0 2 20 9 ? 2299" />
     </bean>
 
-    <!-- ****** For Middle Moon scheduled job ****** -->
+    <!-- ****** For Mothers' Day scheduled job ****** -->
     <bean name="mothersDayEdmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
         <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.MothersDayEdmSendScheduledJob" />
         <property name="jobDataMap">
@@ -346,7 +346,7 @@
     <bean id="mothersDayEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="mothersDayEdmSendJobDetail" />
         <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
-        <property name="cronExpression" value="0 0 7 * * ?" />
+        <property name="cronExpression" value="0 0 2 5 5 ? 2299" />
     </bean>
 
     <!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->
