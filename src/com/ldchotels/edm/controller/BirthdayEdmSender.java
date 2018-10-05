@@ -37,14 +37,14 @@ public class BirthdayEdmSender extends EdmSender {
         
         for (Object key : dbMap.keySet()) {
     		try {
-    			logger.info("********** Procrssing " + key +" ***********");
-    			if (action != null) action.addActionMessage("********** Procrssing " + key +" ***********");
+    			logger.info("********** Procrssing " + key + " ***********");
+    			if (action != null) action.addActionMessage("********** Procrssing " + key + " ***********");
     			employeeDao = (EmployeeDao) dbMap.get(key);
     			if (employeeDao != null) {
     				List<Employee> employeeList = employeeDao.employedList(now.getTime());
     				logger.info("Currently total employed : [" + employeeList.size() + "]");
     				if (action != null) action.addActionMessage("Currently total employed : [" + employeeList.size() + "]");
-    				for(int i = 0 ; i < employeeList.size(); i++){
+    				for (int i = 0; i < employeeList.size(); i++){
     					Calendar birthday = Calendar.getInstance();
     					birthday.setTime(employeeList.get(i).getBirth_dat());
     					if ((birthday.get(Calendar.MONTH) == now.get(Calendar.MONTH)) 
@@ -56,9 +56,9 @@ public class BirthdayEdmSender extends EdmSender {
     					}
     				}
     			}
-    		} catch(Exception e) {
-    			logger.error(e.getMessage());
-    			if (action != null) action.addActionError(e.getMessage());
+    		} catch (Exception e) {
+    			logger.error(e.getStackTrace().toString());
+    			if (action != null) action.addActionError(e.getStackTrace().toString());
     		}
         }	    
  		return list;

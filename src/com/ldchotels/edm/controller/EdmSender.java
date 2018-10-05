@@ -169,8 +169,8 @@ public abstract class EdmSender {
         
         for (Object key : dbMap.keySet()) {
     		try {
-    			logger.info("********** Procrssing " + key +" ***********");
-    			if (action != null) action.addActionMessage("********** Procrssing " + key +" ***********");
+    			logger.info("********** Procrssing " + key + " ***********");
+    			if (action != null) action.addActionMessage("********** Procrssing " + key + " ***********");
     			employeeDao = (EmployeeDao) dbMap.get(key);
     			if (employeeDao != null) {
     				List<Employee> employeeList = employeeDao.employedList(now.getTime());
@@ -181,8 +181,8 @@ public abstract class EdmSender {
     				}
     			}
     		} catch(Exception e) {
-    			logger.error(e.getMessage());
-    			if (action != null) action.addActionError(e.getMessage());
+    			logger.error(e.getStackTrace().toString());
+    			if (action != null) action.addActionError(e.getStackTrace().toString());
     		}
         }
 		

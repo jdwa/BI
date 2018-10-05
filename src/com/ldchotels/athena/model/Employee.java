@@ -46,6 +46,9 @@ public abstract class Employee implements Serializable {
 	
 	@Column(name = "mail_addr")
 	public String getMail_addr() {
+		if (mail_addr == null) {
+			mail_addr = "";
+		}
 		return mail_addr;
 	}
 	public void setMail_addr(String mail_addr) {
