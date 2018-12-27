@@ -13,16 +13,16 @@
 <base href="<%=basePath%>">
 <s:head />
 <sj:head jqueryui="true" jquerytheme="cupertino" />
-<title><s:text name="action.midAutumn.edm.send" /></title>
+<title><s:text name="action.udf1.edm.send" /></title>
 </head>
 <body>
 	<h3>
-		<s:text name="action.midAutumn.edm.send" />
+		<s:text name="action.udf1.edm.send" />
 	</h3>
 	<s:actionerror />
 	<s:actionmessage />
 	<center>
-		<a href="MidAutumnEdmSendAction.action"><s:text name="action.midAutumn.edm.send" /></a>
+		<a href="Udf1EdmSendAction.action"><s:text name="action.udf1.edm.send" /></a>
 	</center>
 </body>
 </html>

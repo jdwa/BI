@@ -186,23 +186,23 @@
 			<value>${fathersDay.edm.subject}</value>
 		</property>		
 		
-		<property name="middleMoonActiveSend">
-			<value>${middleMoon.edm.active.mode}</value>
+		<property name="midAutumnActiveSend">
+			<value>${midAutumn.edm.active.mode}</value>
 		</property>
-		<property name="middleMoonReadDB">
-			<value>${middleMoon.edm.list.from.db}</value>
+		<property name="midAutumnReadDB">
+			<value>${midAutumn.edm.list.from.db}</value>
 		</property>
-		<property name="middleMoonReadFile">
-			<value>${middleMoon.edm.list.from.file}</value>
+		<property name="midAutumnReadFile">
+			<value>${midAutumn.edm.list.from.file}</value>
 		</property>						
-		<property name="middleMoonEdmList">
-			<value>${middleMoon.edm.list}</value>
+		<property name="midAutumnEdmList">
+			<value>${midAutumn.edm.list}</value>
 		</property>			
-		<property name="middleMoonEdmUrl">
-			<value>${middleMoon.edm.url}</value>
+		<property name="midAutumnEdmUrl">
+			<value>${midAutumn.edm.url}</value>
 		</property>			
-		<property name="middleMoonEdmSubject">
-			<value>${middleMoon.edm.subject}</value>
+		<property name="midAutumnEdmSubject">
+			<value>${midAutumn.edm.subject}</value>
 		</property>		
 
 		<property name="mothersDayActiveSend">
@@ -222,7 +222,103 @@
 		</property>			
 		<property name="mothersDayEdmSubject">
 			<value>${mothersDay.edm.subject}</value>
-		</property>									
+		</property>
+		
+		<property name="bossActiveSend">
+			<value>${boss.edm.active.mode}</value>
+		</property>
+		<property name="bossReadDB">
+			<value>${boss.edm.list.from.db}</value>
+		</property>
+		<property name="bossReadFile">
+			<value>${boss.edm.list.from.file}</value>
+		</property>						
+		<property name="bossEdmList">
+			<value>${boss.edm.list}</value>
+		</property>			
+		<property name="bossEdmUrl">
+			<value>${boss.edm.url}</value>
+		</property>			
+		<property name="bossEdmSubject">
+			<value>${boss.edm.subject}</value>
+		</property>
+
+		<property name="ceoActiveSend">
+			<value>${ceo.edm.active.mode}</value>
+		</property>
+		<property name="ceoReadDB">
+			<value>${ceo.edm.list.from.db}</value>
+		</property>
+		<property name="ceoReadFile">
+			<value>${ceo.edm.list.from.file}</value>
+		</property>						
+		<property name="ceoEdmList">
+			<value>${ceo.edm.list}</value>
+		</property>			
+		<property name="ceoEdmUrl">
+			<value>${ceo.edm.url}</value>
+		</property>			
+		<property name="ceoEdmSubject">
+			<value>${ceo.edm.subject}</value>
+		</property>
+
+		<property name="udf1ActiveSend">
+			<value>${udf1.edm.active.mode}</value>
+		</property>
+		<property name="udf1ReadDB">
+			<value>${udf1.edm.list.from.db}</value>
+		</property>
+		<property name="udf1ReadFile">
+			<value>${udf1.edm.list.from.file}</value>
+		</property>						
+		<property name="udf1EdmList">
+			<value>${udf1.edm.list}</value>
+		</property>			
+		<property name="udf1EdmUrl">
+			<value>${udf1.edm.url}</value>
+		</property>			
+		<property name="udf1EdmSubject">
+			<value>${udf1.edm.subject}</value>
+		</property>
+
+		<property name="udf2ActiveSend">
+			<value>${udf2.edm.active.mode}</value>
+		</property>
+		<property name="udf2ReadDB">
+			<value>${udf2.edm.list.from.db}</value>
+		</property>
+		<property name="udf2ReadFile">
+			<value>${udf2.edm.list.from.file}</value>
+		</property>						
+		<property name="udf2EdmList">
+			<value>${udf2.edm.list}</value>
+		</property>			
+		<property name="udf2EdmUrl">
+			<value>${udf2.edm.url}</value>
+		</property>			
+		<property name="udf2EdmSubject">
+			<value>${udf2.edm.subject}</value>
+		</property>
+
+		<property name="udf3ActiveSend">
+			<value>${udf3.edm.active.mode}</value>
+		</property>
+		<property name="udf3ReadDB">
+			<value>${udf3.edm.list.from.db}</value>
+		</property>
+		<property name="udf3ReadFile">
+			<value>${udf3.edm.list.from.file}</value>
+		</property>						
+		<property name="udf3EdmList">
+			<value>${udf3.edm.list}</value>
+		</property>			
+		<property name="udf3EdmUrl">
+			<value>${udf3.edm.url}</value>
+		</property>			
+		<property name="udf3EdmSubject">
+			<value>${udf3.edm.subject}</value>
+		</property>
+										
 	</bean>
  
  	<!-- 
@@ -317,9 +413,9 @@
         <property name="cronExpression" value="0 0 2 3 8 ? 2299" /> 
     </bean>
 
-    <!-- ****** For Middle Moon scheduled job ****** -->
-    <bean name="middleMoonEdmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-        <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.MiddleMoonEdmSendScheduledJob" />
+    <!-- ****** For Mid Autumn scheduled job ****** -->
+    <bean name="midAutumnEdmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.MidAutumnEdmSendScheduledJob" />
         <property name="jobDataMap">
             <map>
                 <entry key="edmProperty" value-ref="edmProperty" />
@@ -327,8 +423,8 @@
         </property>
         <property name="durability" value="true" />
     </bean>
-    <bean id="middleMoonEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="middleMoonEdmSendJobDetail" />
+    <bean id="midAutumnEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="midAutumnEdmSendJobDetail" />
         <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
         <property name="cronExpression" value="0 0 2 20 9 ? 2299" />
     </bean>
@@ -348,6 +444,86 @@
         <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
         <property name="cronExpression" value="0 0 2 5 5 ? 2299" />
     </bean>
+    
+    <!-- ****** For Boss scheduled job ****** -->
+    <bean name="bossEdmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.BossEdmSendScheduledJob" />
+        <property name="jobDataMap">
+            <map>
+                <entry key="edmProperty" value-ref="edmProperty" />
+            </map>
+        </property>
+        <property name="durability" value="true" />
+    </bean>
+    <bean id="bossEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="bossEdmSendJobDetail" />
+        <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
+        <property name="cronExpression" value="0 0 2 31 1 ? 2299" />
+    </bean>
+    
+    <!-- ****** For Ceo scheduled job ****** -->
+    <bean name="ceoEdmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.CeoEdmSendScheduledJob" />
+        <property name="jobDataMap">
+            <map>
+                <entry key="edmProperty" value-ref="edmProperty" />
+            </map>
+        </property>
+        <property name="durability" value="true" />
+    </bean>
+    <bean id="ceoEdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="ceoEdmSendJobDetail" />
+        <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
+        <property name="cronExpression" value="0 0 2 31 1 ? 2299" />
+    </bean>
+    
+    <!-- ****** For Udf1 scheduled job ****** -->
+    <bean name="udf1EdmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.Udf1EdmSendScheduledJob" />
+        <property name="jobDataMap">
+            <map>
+                <entry key="edmProperty" value-ref="edmProperty" />
+            </map>
+        </property>
+        <property name="durability" value="true" />
+    </bean>
+    <bean id="udf1EdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="udf1EdmSendJobDetail" />
+        <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
+        <property name="cronExpression" value="0 0 2 31 1 ? 2299" />
+    </bean>
+    
+    <!-- ****** For Udf2 scheduled job ****** -->
+    <bean name="udf2EdmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.Udf2EdmSendScheduledJob" />
+        <property name="jobDataMap">
+            <map>
+                <entry key="edmProperty" value-ref="edmProperty" />
+            </map>
+        </property>
+        <property name="durability" value="true" />
+    </bean>
+    <bean id="udf2EdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="udf2EdmSendJobDetail" />
+        <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
+        <property name="cronExpression" value="0 0 2 31 1 ? 2299" />
+    </bean>
+    
+    <!-- ****** For Udf3 scheduled job ****** -->
+    <bean name="udf3EdmSendJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ldchotels.edm.scheduler.jobs.Udf3EdmSendScheduledJob" />
+        <property name="jobDataMap">
+            <map>
+                <entry key="edmProperty" value-ref="edmProperty" />
+            </map>
+        </property>
+        <property name="durability" value="true" />
+    </bean>
+    <bean id="udf3EdmSendCronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="udf3EdmSendJobDetail" />
+        <!-- Seconds  Minutes  Hours  Day-of-Month  Month  Day-of-Week  Year(optional field) -->
+        <property name="cronExpression" value="0 0 2 31 1 ? 2299" />
+    </bean>
 
     <!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->
     <bean  class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
@@ -358,8 +534,13 @@
                 <ref bean="christmasEdmSendJobDetail" />
                 <ref bean="dragonBoatEdmSendJobDetail" />
                 <ref bean="fathersDayEdmSendJobDetail" />
-                <ref bean="middleMoonEdmSendJobDetail" />
+                <ref bean="midAutumnEdmSendJobDetail" />
                 <ref bean="mothersDayEdmSendJobDetail" />
+                <ref bean="bossEdmSendJobDetail" />
+                <ref bean="ceoEdmSendJobDetail" />
+                <ref bean="udf1EdmSendJobDetail" />
+                <ref bean="udf2EdmSendJobDetail" />
+                <ref bean="udf3EdmSendJobDetail" />
             </list>
         </property>
          <property name="triggers">
@@ -369,8 +550,13 @@
                 <ref bean="christmasEdmSendCronTrigger" />
                 <ref bean="dragonBoatEdmSendCronTrigger" />
                 <ref bean="fathersDayEdmSendCronTrigger" />
-                <ref bean="middleMoonEdmSendCronTrigger" />
-                <ref bean="mothersDayEdmSendCronTrigger" />           
+                <ref bean="midAutumnEdmSendCronTrigger" />
+                <ref bean="mothersDayEdmSendCronTrigger" />
+                <ref bean="bossEdmSendCronTrigger" />
+                <ref bean="ceoEdmSendCronTrigger" />
+                <ref bean="udf1EdmSendCronTrigger" />
+                <ref bean="udf2EdmSendCronTrigger" />
+                <ref bean="udf3EdmSendCronTrigger" />
             </list>
         </property>
     </bean>

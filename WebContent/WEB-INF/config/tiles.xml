@@ -65,13 +65,13 @@
       <put-attribute name="body" value="/pages/edm/action/fathersDayEdmSendResult.jsp"/>      
   </definition>
   
-  <definition name="pages.edm.action.middleMoonEdmSendInput.tiles" extends="baseLayout">  
+  <definition name="pages.edm.action.midAutumnEdmSendInput.tiles" extends="baseLayout">  
       <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
-      <put-attribute name="body" value="/pages/edm/action/middleMoonEdmSendInput.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/midAutumnEdmSendInput.jsp"/>      
   </definition>
-  <definition name="pages.edm.action.middleMoonEdmSendResult.tiles" extends="baseLayout">  
+  <definition name="pages.edm.action.midAutumnEdmSendResult.tiles" extends="baseLayout">  
       <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
-      <put-attribute name="body" value="/pages/edm/action/middleMoonEdmSendResult.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/midAutumnEdmSendResult.jsp"/>      
   </definition>
   
   <definition name="pages.edm.action.mothersDayEdmSendInput.tiles" extends="baseLayout">  
@@ -81,6 +81,51 @@
   <definition name="pages.edm.action.mothersDayEdmSendResult.tiles" extends="baseLayout">  
       <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
       <put-attribute name="body" value="/pages/edm/action/mothersDayEdmSendResult.jsp"/>      
+  </definition>
+  
+  <definition name="pages.edm.action.bossEdmSendInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/bossEdmSendInput.jsp"/>      
+  </definition>
+  <definition name="pages.edm.action.bossEdmSendResult.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/bossEdmSendResult.jsp"/>      
+  </definition>
+    
+  <definition name="pages.edm.action.ceoEdmSendInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/ceoEdmSendInput.jsp"/>      
+  </definition>
+  <definition name="pages.edm.action.ceoEdmSendResult.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/ceoEdmSendResult.jsp"/>      
+  </definition>
+
+  <definition name="pages.edm.action.udf1EdmSendInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/udf1EdmSendInput.jsp"/>      
+  </definition>
+  <definition name="pages.edm.action.udf1EdmSendResult.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/udf1EdmSendResult.jsp"/>      
+  </definition>
+
+  <definition name="pages.edm.action.udf2EdmSendInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/udf2EdmSendInput.jsp"/>      
+  </definition>
+  <definition name="pages.edm.action.udf2EdmSendResult.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/udf2EdmSendResult.jsp"/>      
+  </definition>
+
+  <definition name="pages.edm.action.udf3EdmSendInput.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/udf3EdmSendInput.jsp"/>      
+  </definition>
+  <definition name="pages.edm.action.udf3EdmSendResult.tiles" extends="baseLayout">  
+      <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
+      <put-attribute name="body" value="/pages/edm/action/udf3EdmSendResult.jsp"/>      
   </definition>
     
    <!-- Protel -->

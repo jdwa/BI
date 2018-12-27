@@ -5,22 +5,22 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
-import com.ldchotels.edm.controller.MiddleMoonEdmSender;
+import com.ldchotels.edm.controller.MidAutumnEdmSender;
 import com.ldchotels.util.EdmProperty;
 
-public class MiddleMoonEdmSendScheduledJob extends QuartzJobBean {
+public class MidAutumnEdmSendScheduledJob extends QuartzJobBean {
 	
-	private static Logger logger = Logger.getLogger(MiddleMoonEdmSendScheduledJob.class.getName());
+	private static Logger logger = Logger.getLogger(MidAutumnEdmSendScheduledJob.class.getName());
 	private EdmProperty edmProperty;
 	
 	@Override
 	protected void executeInternal(JobExecutionContext ctx)	throws JobExecutionException {
-		logger.info("[MiddleMoonEdmSendScheduledJob][executeInternal]");
+		logger.info("[MidAutumnEdmSendScheduledJob][executeInternal]");
 		try {
-			MiddleMoonEdmSender edmSender = new MiddleMoonEdmSender(edmProperty.getMiddleMoonEdmSubject(), 
-					edmProperty.getMiddleMoonEdmUrl(), edmProperty.getMiddleMoonEdmList(), 
-					edmProperty.isMiddleMoonReadFile(), edmProperty.isMiddleMoonReadDB(), 
-					edmProperty.isMiddleMoonActiveSend(), edmProperty.getSleepMillisecond());
+			MidAutumnEdmSender edmSender = new MidAutumnEdmSender(edmProperty.getMidAutumnEdmSubject(), 
+					edmProperty.getMidAutumnEdmUrl(), edmProperty.getMidAutumnEdmList(), 
+					edmProperty.isMidAutumnReadFile(), edmProperty.isMidAutumnReadDB(), 
+					edmProperty.isMidAutumnActiveSend(), edmProperty.getSleepMillisecond());
 			edmSender.run();
 		} catch (Exception e) {
 			logger.info(e.getMessage());

@@ -9,15 +9,15 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
-import com.ldchotels.edm.controller.MiddleMoonEdmSender;
+import com.ldchotels.edm.controller.Udf3EdmSender;
 import com.ldchotels.util.EdmProperty;
 
-public class MiddleMoonEdmSendAction extends ActionSupport implements Preparable, SessionAware {
+public class Udf3EdmSendAction extends ActionSupport implements Preparable, SessionAware {
 	private static final long serialVersionUID = 1L;
 	private Map<String, Object> session;
 	private EdmProperty edmProperty;
 	
-	public MiddleMoonEdmSendAction() {
+	public Udf3EdmSendAction() {
 		super();
 	}
 
@@ -25,10 +25,10 @@ public class MiddleMoonEdmSendAction extends ActionSupport implements Preparable
 	@Override
 	public String execute() throws Exception {
 		String returnValue = SUCCESS;
-		MiddleMoonEdmSender edmSender = new MiddleMoonEdmSender(edmProperty.getMiddleMoonEdmSubject(), 
-				edmProperty.getMiddleMoonEdmUrl(), edmProperty.getMiddleMoonEdmList(), 
-				edmProperty.isMiddleMoonReadFile(), edmProperty.isMiddleMoonReadDB(), 
-				edmProperty.isMiddleMoonActiveSend(), edmProperty.getSleepMillisecond());
+		Udf3EdmSender edmSender = new Udf3EdmSender(edmProperty.getUdf3EdmSubject(), 
+				edmProperty.getUdf3EdmUrl(), edmProperty.getUdf3EdmList(), 
+				edmProperty.isUdf3ReadFile(), edmProperty.isUdf3ReadDB(), 
+				edmProperty.isUdf3ActiveSend(), edmProperty.getSleepMillisecond());
 		edmSender.setAction(this);
 		edmSender.run();	
 		return returnValue;

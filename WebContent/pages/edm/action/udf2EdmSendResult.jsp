@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
 <%
  String path = request.getContextPath();
  String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -13,18 +15,13 @@
 <base href="<%=basePath%>">
 <s:head />
 <sj:head jqueryui="true" jquerytheme="cupertino" />
-<title><s:text name="action.midAutumn.edm.send" /></title>
+<title><s:text name="action.udf2.edm.send.completed" /></title>
 </head>
 <body>
 	<h3>
-		<s:text name="action.midAutumn.edm.send" />
+		<s:text name="action.udf2.edm.send.completed" />
 	</h3>
 	<s:actionerror />
 	<s:actionmessage />
-	<center>
-		<a href="MidAutumnEdmSendAction.action"><s:text name="action.midAutumn.edm.send" /></a>
-	</center>
 </body>
 </html>
-
-

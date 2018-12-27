@@ -15,11 +15,11 @@
 <base href="<%=basePath%>">
 <s:head />
 <sj:head jqueryui="true" jquerytheme="cupertino" />
-<title><s:text name="action.middleMoon.edm.send.completed" /></title>
+<title><s:text name="action.midAutumn.edm.send.completed" /></title>
 </head>
 <body>
 	<h3>
-		<s:text name="action.middleMoon.edm.send.completed" />
+		<s:text name="action.midAutumn.edm.send.completed" />
 	</h3>
 	<s:actionerror />
 	<s:actionmessage />

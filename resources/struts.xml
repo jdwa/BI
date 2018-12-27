@@ -164,18 +164,18 @@
 				<result name="success" type="tiles">pages.edm.action.fathersDayEdmSendResult.tiles</result>
 			</action>
 
-			<action name="MiddleMoonEdmSendAction.input" class="com.ldchotels.edm.action.MiddleMoonEdmSendAction"
+			<action name="MidAutumnEdmSendAction.input" class="com.ldchotels.edm.action.MidAutumnEdmSendAction"
 				method="input">
-				<result name="input" type="tiles">pages.edm.action.middleMoonEdmSendInput.tiles</result>
+				<result name="input" type="tiles">pages.edm.action.midAutumnEdmSendInput.tiles</result>
 			</action>		
-			<action name="MiddleMoonEdmSendAction" class="com.ldchotels.edm.action.MiddleMoonEdmSendAction">
+			<action name="MidAutumnEdmSendAction" class="com.ldchotels.edm.action.MidAutumnEdmSendAction">
 				<interceptor-ref name="actionStack"/>
 				<interceptor-ref name="execAndWait">
 			        <param name="delay">1000</param>
 			        <param name="delaySleepInterval">1000</param>
 		    	</interceptor-ref>
 		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
-				<result name="success" type="tiles">pages.edm.action.middleMoonEdmSendResult.tiles</result>
+				<result name="success" type="tiles">pages.edm.action.midAutumnEdmSendResult.tiles</result>
 			</action>
 
 			<action name="MothersDayEdmSendAction.input" class="com.ldchotels.edm.action.MothersDayEdmSendAction"
@@ -191,7 +191,77 @@
 		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
 				<result name="success" type="tiles">pages.edm.action.mothersDayEdmSendResult.tiles</result>
 			</action>
+			
+			<action name="BossEdmSendAction.input" class="com.ldchotels.edm.action.BossEdmSendAction"
+				method="input">
+				<result name="input" type="tiles">pages.edm.action.bossEdmSendInput.tiles</result>
+			</action>		
+			<action name="BossEdmSendAction" class="com.ldchotels.edm.action.BossEdmSendAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
+				<result name="success" type="tiles">pages.edm.action.bossEdmSendResult.tiles</result>
+			</action>
+
+			<action name="CeoEdmSendAction.input" class="com.ldchotels.edm.action.CeoEdmSendAction"
+				method="input">
+				<result name="input" type="tiles">pages.edm.action.ceoEdmSendInput.tiles</result>
+			</action>		
+			<action name="CeoEdmSendAction" class="com.ldchotels.edm.action.CeoEdmSendAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
+				<result name="success" type="tiles">pages.edm.action.ceoEdmSendResult.tiles</result>
+			</action>
 		
+			<action name="Udf1EdmSendAction.input" class="com.ldchotels.edm.action.Udf1EdmSendAction"
+				method="input">
+				<result name="input" type="tiles">pages.edm.action.udf1EdmSendInput.tiles</result>
+			</action>		
+			<action name="Udf1EdmSendAction" class="com.ldchotels.edm.action.Udf1EdmSendAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
+				<result name="success" type="tiles">pages.edm.action.udf1EdmSendResult.tiles</result>
+			</action>
+			
+			<action name="Udf2EdmSendAction.input" class="com.ldchotels.edm.action.Udf2EdmSendAction"
+				method="input">
+				<result name="input" type="tiles">pages.edm.action.udf2EdmSendInput.tiles</result>
+			</action>		
+			<action name="Udf2EdmSendAction" class="com.ldchotels.edm.action.Udf2EdmSendAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
+				<result name="success" type="tiles">pages.edm.action.udf2EdmSendResult.tiles</result>
+			</action>
+
+			<action name="Udf3EdmSendAction.input" class="com.ldchotels.edm.action.Udf3EdmSendAction"
+				method="input">
+				<result name="input" type="tiles">pages.edm.action.udf3EdmSendInput.tiles</result>
+			</action>		
+			<action name="Udf3EdmSendAction" class="com.ldchotels.edm.action.Udf3EdmSendAction">
+				<interceptor-ref name="actionStack"/>
+				<interceptor-ref name="execAndWait">
+			        <param name="delay">1000</param>
+			        <param name="delaySleepInterval">1000</param>
+		    	</interceptor-ref>
+		    	<result name="wait" type="tiles">pages.system.action.wait.tiles</result>
+				<result name="success" type="tiles">pages.edm.action.udf3EdmSendResult.tiles</result>
+			</action>
+			
 		<!-- Protel Actions -->
 			<action name="KundenQueryAction.input" class="com.ldchotels.protel.action.KundenQueryAction"
 				method="input">

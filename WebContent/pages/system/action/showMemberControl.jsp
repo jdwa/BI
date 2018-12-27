@@ -32,11 +32,16 @@
 			<sj:accordionItem title="%{menu.edm.system}">
 				<sj:div><a href="BirthdayEdmSendAction.input.action"><s:text name="action.birthday.edm.send" /></a></sj:div>	
 				<sj:div><a href="DragonBoatEdmSendAction.input.action"><s:text name="action.dragonBoat.edm.send" /></a></sj:div>	
-				<sj:div><a href="MiddleMoonEdmSendAction.input.action"><s:text name="action.middleMoon.edm.send" /></a></sj:div>	
+				<sj:div><a href="MidAutumnEdmSendAction.input.action"><s:text name="action.midAutumn.edm.send" /></a></sj:div>	
 				<sj:div><a href="ChristmasEdmSendAction.input.action"><s:text name="action.christmas.edm.send" /></a></sj:div>	
 				<sj:div><a href="ChineseNewYearEdmSendAction.input.action"><s:text name="action.chineseNewYear.edm.send" /></a></sj:div>	
 				<sj:div><a href="FathersDayEdmSendAction.input.action"><s:text name="action.fathersDay.edm.send" /></a></sj:div>	
 				<sj:div><a href="MothersDayEdmSendAction.input.action"><s:text name="action.mothersDay.edm.send" /></a></sj:div>	
+				<sj:div><a href="BossEdmSendAction.input.action"><s:text name="action.boss.edm.send" /></a></sj:div>
+				<sj:div><a href="CeoEdmSendAction.input.action"><s:text name="action.ceo.edm.send" /></a></sj:div>
+				<sj:div><a href="Udf1EdmSendAction.input.action"><s:text name="action.udf1.edm.send" /></a></sj:div>
+				<sj:div><a href="Udf2EdmSendAction.input.action"><s:text name="action.udf2.edm.send" /></a></sj:div>
+				<sj:div><a href="Udf3EdmSendAction.input.action"><s:text name="action.udf3.edm.send" /></a></sj:div>
 			</sj:accordionItem>
 			<s:set name="menu.protel.system"><s:text name="menu.protel.system" /></s:set>
 			<sj:accordionItem title="%{menu.protel.system}">
