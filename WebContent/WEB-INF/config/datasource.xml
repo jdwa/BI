@@ -11,24 +11,26 @@
 	<bean id="systemDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-		<property name="url"
-			value="jdbc:sqlserver://192.168.20.225:1433;databaseName=BI" />
+		<property name="url" value="jdbc:sqlserver://192.168.20.225:1433;databaseName=BI" />
 		<property name="username" value="bi.admin" />
 		<property name="password" value="!QAZxsw2" />
 	</bean>
 
-	<!-- 測試機 Protel <bean id="protelDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
-		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" 
-		/> <property name="url" value="jdbc:sqlserver:///localhost:1433;databaseName=Protel" 
-		/> <property name="username" value="RO_DB_USEER" /> <property name="password" 
-		value="!QAZxsw2" /> </bean> -->
+	<!-- 測試機 Protel 
+	<bean id="protelDataSource" 
+	    class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" /> 
+		<property name="url" value="jdbc:sqlserver:///localhost:1433;databaseName=Protel" /> 
+		<property name="username" value="RO_DB_USEER" /> 
+		<property name="password" value="!QAZxsw2" /> 
+	</bean> 
+	-->
 
 	<!-- 正式機 Protel -->
 	<bean id="protelDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-		<property name="url"
-			value="jdbc:sqlserver://192.168.20.234:1433;databaseName=Protel" />
+		<property name="url" value="jdbc:sqlserver://192.168.20.234:1433;databaseName=Protel" />
 		<property name="username" value="RO_DB_USEER" />
 		<property name="password" value="!QAZxsw2@Lhdc" />
 	</bean>
