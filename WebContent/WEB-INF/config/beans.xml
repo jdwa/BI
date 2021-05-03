@@ -17,7 +17,9 @@
         <property name="locations">
             <list>
                 <value>/WEB-INF/config/system.properties</value>
+                <!--  
                 <value>/WEB-INF/config/salesforce.properties</value>
+                -->
                 <value>/WEB-INF/config/mail.properties</value>
                 <value>/WEB-INF/config/edm.properties</value>
             </list>
@@ -28,7 +30,7 @@
     
     <bean id="sysProperty" class="com.ldchotels.util.SystemProperty">							
 	</bean>
-	
+	<!--  
 	<bean id="sfProperty" class="com.ldchotels.util.SalesforceProperty">
 		<property name="authorization">
 			<value>${sf.authorization}</value>
@@ -64,7 +66,7 @@
 			<value>${session.transaction.result.file}</value>
 		</property>
 	</bean>
-
+	-->
 	<bean id="mailProperty" class="com.ldchotels.util.MailProperty">
 		<property name="mailHost">
 			<value>${mail.host}</value>
@@ -594,7 +596,7 @@
 	********************
 	*** Protel Beans ***
 	********************
-	-->
+	
 	<bean id="kundenDao" class="com.ldchotels.protel.dao.KundenDaoImpl">
 		<property name="sessionFactory" ref="protelSessionFactory" />
 	</bean>
@@ -626,7 +628,7 @@
 	<bean id="transactionBo" class="com.ldchotels.protel.bo.TransactionBoImpl">
 		<property name="transactionDao" ref="transactionDao" />
 	</bean>
-	
+	-->
 	<!--
 	********************
 	*** Athena Beans ***

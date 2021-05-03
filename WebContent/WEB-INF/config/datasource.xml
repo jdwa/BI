@@ -26,7 +26,7 @@
 	</bean> 
 	-->
 
-	<!-- 正式機 Protel -->
+	<!-- 正式機 Protel 
 	<bean id="protelDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
@@ -34,7 +34,7 @@
 		<property name="username" value="RO_DB_USEER" />
 		<property name="password" value="!QAZxsw2@Lhdc" />
 	</bean>
-
+	-->
 	<!-- 
 	************************ 
 	***	德安系統各館資料庫  ***

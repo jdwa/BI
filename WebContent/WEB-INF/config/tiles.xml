@@ -128,7 +128,7 @@
       <put-attribute name="body" value="/pages/edm/action/udf3EdmSendResult.jsp"/>      
   </definition>
     
-   <!-- Protel -->
+   <!-- Protel 
   <definition name="pages.protel.action.queryKundenInput.tiles" extends="baseLayout">  
       <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
       <put-attribute name="body" value="/pages/protel/action/queryKundenInput.jsp"/>      
@@ -137,8 +137,8 @@
       <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
       <put-attribute name="body" value="/pages/protel/action/queryKundenResult.jsp"/>      
   </definition>
-  
-  <!-- Salesforce -->
+  -->
+  <!-- Salesforce 
   <definition name="pages.salesforce.action.upsertAccountInput.tiles" extends="baseLayout">  
       <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
       <put-attribute name="body" value="/pages/salesforce/action/upsertAccountInput.jsp"/>      
@@ -179,7 +179,7 @@
       <put-attribute name="menu" value="/pages/system/action/showMemberControl.jsp"/>      
       <put-attribute name="body" value="/pages/salesforce/action/downloadResultFiles.jsp"/>      
   </definition>
-  
+  -->
   <!-- ***************************************************************************************** -->
   <!-- System -->
   <definition name="pages.system.action.wait.tiles" extends="baseLayout">  

@@ -43,14 +43,16 @@
 				<sj:div><a href="Udf2EdmSendAction.input.action"><s:text name="action.udf2.edm.send" /></a></sj:div>
 				<sj:div><a href="Udf3EdmSendAction.input.action"><s:text name="action.udf3.edm.send" /></a></sj:div>
 			</sj:accordionItem>
+			<!--  
 			<s:set name="menu.protel.system"><s:text name="menu.protel.system" /></s:set>
 			<sj:accordionItem title="%{menu.protel.system}">
 				<sj:div><a href="KundenQueryAction.input.action"><s:text name="action.protel.query.kunden" /></a></sj:div>	
 			</sj:accordionItem>
+			-->
+			<!--  
 			<s:set name="menu.sf.system"><s:text name="menu.sf.system" /></s:set>
 			<sj:accordionItem title="%{menu.sf.system}">
 				<sj:div><a href="AccountUpsertAction.input.action"><s:text name="action.sf.account.upsert" /></a></sj:div>
-				<!-- <sj:div><a href="ReservationUpsertAction.input.action"><s:text name="action.sf.reservation.upsert" /></a></sj:div> -->
 				<sj:div><a href="ReservationUpsertAction.input.action"><s:text name="action.sf.reservation.upsert" /></a></sj:div>	
 				<sj:div><a href="ReservationCOUpsertAction.input.action"><s:text name="action.sf.reservationCO.upsert" /></a></sj:div>	
 				<sj:div><a href="TransactionUpsertAction.input.action"><s:text name="action.sf.transaction.upsert" /></a></sj:div>
@@ -60,6 +62,7 @@
 				<sj:div><a href="ReservationDeleteAction.input.action"><s:text name="action.sf.reservation.delete" /></a></sj:div>	
 				<sj:div><a href="TransactionDeleteAction.input.action"><s:text name="action.sf.transaction.delete" /></a></sj:div>	
 			</sj:accordionItem>
+			-->
 		</security:authorize>
 
 		<security:authorize access="hasAnyRole('ROLE_ADMIN')">

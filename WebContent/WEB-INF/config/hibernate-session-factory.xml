@@ -27,7 +27,7 @@
 			</list>
 		</property>					
 	</bean>
-
+	<!--  
 	<bean id="protelSessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="protelDataSource" />
@@ -47,7 +47,7 @@
 			</list>
 		</property>					
 	</bean>
-	
+	-->
 	<bean id="athenaHQSessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="HQDataSource" />
@@ -198,12 +198,12 @@
 	</bean>
 	
 	<tx:annotation-driven transaction-manager="systemTransactionManager" />
-	
+	<!--  
 	<bean id="protelTransactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="protelSessionFactory" />
 	</bean>
-	
+	-->
 	<bean id="athenaHQTransactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="athenaHQSessionFactory" />
